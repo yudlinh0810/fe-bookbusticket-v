@@ -1,13 +1,12 @@
 import axios from 'axios';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const bookBusTicketAPI = axios.create({
-  baseURL: `https://${process.env.REACT_APP_API_URL}.ngrok-free.app/api/`,
+  baseURL: `https://${process.env.REACT_APP_API_URL}.ngrok-free.app/`,
+  headers: { 'ngrok-skip-browser-warning': 'true' },
 });
 bookBusTicketAPI.interceptors.response.use(
   (response) => {
-    return [response.headers || null, response.status || null, response.data || []];
+    return [response.data || []];
   },
   (error) => {
     return Promise.reject(error);
