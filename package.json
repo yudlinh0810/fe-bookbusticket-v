@@ -39,6 +39,7 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
+    ],
+    "proxy": "https://06b9-116-110-75-153.ngrok-free.app"
   }
 }
