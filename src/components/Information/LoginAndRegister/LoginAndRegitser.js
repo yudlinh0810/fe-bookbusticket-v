@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import './login.scss';
+import './login_register.scss';
 import Header from '../../Header/Header';
 import DropWater from '../../Animations/DropWater/DropWater';
 import { login, register } from '../../../services/Customer';
@@ -9,31 +9,22 @@ const Login = () => {
   const containerRef = useRef(null);
   const registerBtnRef = useRef(null);
   const loginBtnRef = useRef(null);
-  const [customer, setCustomer] = useState(null);
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
+
     const formData = new FormData(event.target);
-
-    // In ra từng mục trong formData
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
-
     const data = Object.fromEntries(formData.entries());
-    console.log('Data Object:', data); // Log đối tượng data sau khi chuyển đổi
 
     try {
       const res = await register(data);
-      if (res.status !== 'OK') {
+      if (res[0].status !== 'OK') {
         toast.error('Đăng ký thất bại');
-        throw new Error('Network response was not ok');
+      } else {
+        toast.success('Đã gửi mã OTP đến email của bạn');
       }
-      const result = await res.data;
-      setCustomer(result);
-      console.log(customer);
     } catch (error) {
-      console.log('ERR', error);
+      console.log('ERR 27', error);
     }
   };
 
@@ -42,23 +33,17 @@ const Login = () => {
     const formData = new FormData(event.target);
 
     const data = Object.fromEntries(formData.entries());
-    console.log('Data Object:', data);
 
     try {
       const res = await login(data);
-      console.log(res[0]);
-      console.log(res[0].status);
       if (res[0]['status'] === 'OK') {
-        const result = res[0].access_token;
         localStorage.setItem('access_token', res[0].access_token);
-        console.log('access', localStorage.getItem('access_token'));
-        setCustomer(result);
         toast.success('Đăng nhập thành công');
       } else {
         toast.error('Đăng nhập thất bại');
       }
     } catch (error) {
-      console.log('ERR', error);
+      console.log('ERR 46', error);
     }
   };
 
