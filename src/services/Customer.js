@@ -8,4 +8,8 @@ const register = (newCustomer) => {
   return bookBusTicketAPI.post(`/customer/register`, newCustomer);
 };
 
-export { login, register };
+const verifyEmail = (verify) => {
+  return bookBusTicketAPI.post(`/customer/verify-email`, verify);
+};
+
+export { login, register, verifyEmail };

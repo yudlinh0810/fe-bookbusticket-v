@@ -1,14 +1,16 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './login_register.scss';
 import Header from '../../Header/Header';
 import DropWater from '../../Animations/DropWater/DropWater';
 import { login, register } from '../../../services/Customer';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const containerRef = useRef(null);
   const registerBtnRef = useRef(null);
   const loginBtnRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
@@ -22,6 +24,9 @@ const Login = () => {
         toast.error('Đăng ký thất bại');
       } else {
         toast.success('Đã gửi mã OTP đến email của bạn');
+        navigate('/verify-email', {
+          state: { email: data.email, name: data.name, password: data.password },
+        });
       }
     } catch (error) {
       console.log('ERR 27', error);
@@ -76,26 +81,45 @@ const Login = () => {
       <DropWater>
         <Header />
         <div className='full'>
-          <div className='container' id='container' ref={containerRef}>
+          <div id='r-l-container' ref={containerRef}>
             <div className='form-container sign-up'>
               <form onSubmit={handleRegisterSubmit}>
                 <h1>Create Account</h1>
                 <span>or use your email for registration</span>
-                <input type='email' name='email' placeholder='Email' />
-                <input type='text' name='name' placeholder='Name' />
-                <input type='password' name='password' placeholder='Password' />
-                <input type='password' name='confirmPassword' placeholder='Confirm Password' />
-                <button type='submit'>Sign Up</button>
+                <input className='lg-input' type='email' name='email' placeholder='Email' />
+                <input className='lg-input' type='text' name='name' placeholder='Name' />
+                <input
+                  className='lg-input'
+                  type='password'
+                  name='password'
+                  placeholder='Password'
+                />
+                <input
+                  className='lg-input'
+                  type='password'
+                  name='confirmPassword'
+                  placeholder='Confirm Password'
+                />
+                <button className='lg-button' type='submit'>
+                  Sign Up
+                </button>
               </form>
             </div>
             <div className='form-container sign-in'>
               <form onSubmit={handleLoginSubmit}>
                 <h1>Sign In</h1>
                 <span>or use your email password</span>
-                <input type='email' name='email' placeholder='Email' />
-                <input type='password' name='password' placeholder='Password' />
+                <input className='lg-input' type='email' name='email' placeholder='Email' />
+                <input
+                  className='lg-input'
+                  type='password'
+                  name='password'
+                  placeholder='Password'
+                />
                 <a href='/'>Forget Your Password?</a>
-                <button type='submit'>Sign In</button>
+                <button className='lg-button' type='submit'>
+                  Sign In
+                </button>
               </form>
             </div>
             <div className='toggle-container'>
@@ -103,14 +127,14 @@ const Login = () => {
                 <div className='toggle-panel toggle-left'>
                   <h1>Welcome Back!</h1>
                   <p>Log in to use all site features</p>
-                  <button className='hidden' ref={loginBtnRef}>
+                  <button className='lg-button hidden' ref={loginBtnRef}>
                     Sign In
                   </button>
                 </div>
                 <div className='toggle-panel toggle-right'>
                   <h1>Hello, Friend!</h1>
                   <p>Register with your personal details to use all of site features</p>
-                  <button type='button' className='hidden' ref={registerBtnRef}>
+                  <button type='button' className='lg-button hidden' ref={registerBtnRef}>
                     Sign Up
                   </button>
                 </div>
