@@ -1,0 +1,29 @@
+.full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+  margin-top: 2rem;
+  #verify-OTP-container {
+    display: grid;
+    place-items: center;
+    height: 29rem;
+    width: 26rem;
+    padding: 2rem;
+    border-radius: 12px;
+    background: #fff;
+    gap: 1rem;
+    #verify-otp-img {
+      width: 12rem;
+      height: 12rem;
+    }
+    .footer {
+      display: flex;
+      .underline {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}
