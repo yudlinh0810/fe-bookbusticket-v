@@ -44,6 +44,7 @@ const Login = () => {
       if (res[0]['status'] === 'OK') {
         localStorage.setItem('access_token', res[0].access_token);
         toast.success('Đăng nhập thành công');
+        navigate('/');
       } else {
         toast.error('Đăng nhập thất bại');
       }
