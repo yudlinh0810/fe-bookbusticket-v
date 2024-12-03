@@ -2,14 +2,18 @@ import React, { useRef, useEffect } from 'react';
 import './login_register.scss';
 import Header from '../../Header/Header';
 import DropWater from '../../Animations/DropWater/DropWater';
-import { login, register } from '../../../services/Customer';
+import { fetchCustomer, login, register } from '../../../services/Customer';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import useUserStore from '../../../stores/UserStore';
 
 const Login = () => {
   const containerRef = useRef(null);
   const registerBtnRef = useRef(null);
   const loginBtnRef = useRef(null);
+  const { user, setUser } = useUserStore();
+  console.log('user', user);
+
   const navigate = useNavigate();
 
   const handleRegisterSubmit = async (event) => {
@@ -43,6 +47,20 @@ const Login = () => {
       const res = await login(data);
       if (res[0]['status'] === 'OK') {
         localStorage.setItem('access_token', res[0].access_token);
+        const detail = await fetchCustomer(res[0]);
+        console.log('detail', detail);
+        const result = {
+          id: detail.id,
+          email: detail.email,
+          name: detail.name,
+          phone: detail.phone,
+          portrait: detail.portrait,
+          role_id: detail.role_id,
+          status_id: detail.status_id,
+          address: detail.address,
+          day_birth: detail.day_birth,
+        };
+        setUser(result);
         toast.success('Đăng nhập thành công');
         navigate('/');
       } else {
