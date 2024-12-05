@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useUserStore from '../../../stores/UserStore';
 import { toast } from 'react-toastify';
 import { fetchCustomer, updateCustomer } from '../../../services/Customer';
+import Header from '../../Header/Header';
 
 const UserProfile = () => {
   const { user, setUser } = useUserStore();
@@ -46,31 +47,34 @@ const UserProfile = () => {
   }, [user]);
 
   return (
-    <div className='user-profile'>
-      {' '}
-      <h1>User Profile</h1>{' '}
-      <form onSubmit={handleUpdate}>
-        {user ? (
-          <div>
-            {' '}
-            <input
-              value={data.name}
-              onChange={(e) => setData({ ...data, name: e.target.value })}
-            />{' '}
-            <input defaultValue={user.email} readOnly />{' '}
+    <div>
+      <Header />
+      <div className='user-profile'>
+        {' '}
+        <h1>User Profile</h1>{' '}
+        <form onSubmit={handleUpdate}>
+          {user ? (
             <div>
-              <input type='file' accept='.png, .jpg' onChange={(e) => handleFileChange(e)} />
-              <img src={previewImage} alt='portrait' width={70} height={100}></img>
+              {' '}
+              <input
+                value={data.name}
+                onChange={(e) => setData({ ...data, name: e.target.value })}
+              />{' '}
+              <input defaultValue={user.email} readOnly />{' '}
+              <div>
+                <input type='file' accept='.png, .jpg' onChange={(e) => handleFileChange(e)} />
+                <img src={previewImage} alt='portrait' width={70} height={100}></img>
+              </div>
+              <button type='submit'>Update Profile</button>{' '}
             </div>
-            <button type='submit'>Update Profile</button>{' '}
-          </div>
-        ) : (
-          <div>
-            {' '}
-            <p>No user logged in.</p>{' '}
-          </div>
-        )}{' '}
-      </form>
+          ) : (
+            <div>
+              {' '}
+              <p>No user logged in.</p>{' '}
+            </div>
+          )}{' '}
+        </form>
+      </div>
     </div>
   );
 };
