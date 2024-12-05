@@ -14,7 +14,7 @@ const Header = () => {
     <div className='header-container'>
       <div className='header-left'>
         <Link to={'/'}>
-          <img src={logo} alt='logo' width={200} />
+          <img src={logo} alt='logo' width={200} height={200} />
         </Link>
         <a className='h-l-content' href='/'>
           Cam kết hoàn 150% nếu nhà xe không cung cấp dịch vụ vận chuyển
