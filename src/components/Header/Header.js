@@ -2,6 +2,7 @@ import React from 'react';
 import './header.scss';
 import { Link, useLocation } from 'react-router-dom';
 import useUserStore from '../../stores/UserStore';
+import logo from '../../assets/images/logo_vexe.gif';
 
 const Header = () => {
   const location = useLocation();
@@ -13,10 +14,7 @@ const Header = () => {
     <div className='header-container'>
       <div className='header-left'>
         <Link to={'/'}>
-          <img
-            src='https://storage.googleapis.com/fe-production/svgIcon/icon_vxr_full_2.svg'
-            alt='logo'
-          />
+          <img src={logo} alt='logo' width={200} />
         </Link>
         <a className='h-l-content' href='/'>
           Cam kết hoàn 150% nếu nhà xe không cung cấp dịch vụ vận chuyển
@@ -47,7 +45,9 @@ const Header = () => {
               <div className='btn-hd-r-li'>
                 {user?.name}
                 <div className='hidden'>
-                  <p className='mt-1'>Thông tin cá nhân</p>
+                  <Link to={'/user-profile'} className='mt-1'>
+                    Thông tin cá nhân
+                  </Link>
                   <p className='mt-1' onClick={handleLogOut}>
                     Đăng xuất
                   </p>

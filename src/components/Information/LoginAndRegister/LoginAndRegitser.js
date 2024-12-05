@@ -55,6 +55,7 @@ const Login = () => {
           name: detail.name,
           phone: detail.phone,
           portrait: detail.portrait,
+          public_img_id: detail.public_img_id,
           role_id: detail.role_id,
           status_id: detail.status_id,
           address: detail.address,
