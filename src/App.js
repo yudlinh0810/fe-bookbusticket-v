@@ -6,6 +6,7 @@ import Login from './components/Information/LoginAndRegister/LoginAndRegitser';
 import { ToastContainer } from 'react-toastify';
 import VerifyOTP from './components/Information/VerifyOTP/VerifyOTP';
 import UserProfile from './components/Information/UserProfile/UserProfile';
+import SearchTrip from './pages/SearchTripPage/SearchTripPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login-register' element={<Login />} />
         <Route path='/verify-email' element={<VerifyOTP />} />
         <Route path='/user-profile' element={<UserProfile />} />
+        <Route path='/search-trip' element={<SearchTrip />} />
       </Routes>
       <ToastContainer
         position='top-right'
