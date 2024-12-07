@@ -43,12 +43,14 @@ const Header = () => {
           <li className='hd-r-li'>
             {user?.name ? (
               <div className='btn-hd-r-li'>
-                {user?.name}
+                <div className='username'>{user?.name}</div>
                 <div className='hidden'>
-                  <Link to={'/user-profile'} className='mt-1'>
-                    Thông tin cá nhân
-                  </Link>
-                  <p className='mt-1' onClick={handleLogOut}>
+                  <div className='feat'>
+                    <Link to={'/user-profile'} className='feat-info'>
+                      Thông tin cá nhân
+                    </Link>
+                  </div>
+                  <p className='feat' onClick={handleLogOut}>
                     Đăng xuất
                   </p>
                 </div>

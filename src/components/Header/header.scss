@@ -66,14 +66,21 @@
     }
     .btn-hd-r-li {
       height: 2rem;
+      width: 5rem;
       padding: 0.8rem;
       border: none;
       background-color: #fff;
+      color: #000;
       padding: 0.4rem;
       border-radius: 0.3rem;
       position: relative;
       cursor: pointer;
-      text-decoration: none;
+      .username {
+        text-decoration: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
       .hidden {
         display: none;
         width: 10rem;
@@ -81,11 +88,15 @@
         position: absolute;
         top: 2rem;
         right: 0;
-        .mt-1 {
+        .feat {
+          color: #000;
           padding: 0.6rem;
-          text-decoration: none;
           &:hover {
             background: #ccc;
+          }
+          .feat-info {
+            color: #000;
+            text-decoration: none;
           }
         }
       }
