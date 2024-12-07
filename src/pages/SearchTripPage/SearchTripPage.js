@@ -12,15 +12,27 @@ const SearchTrip = () => {
   const [listTrip, setListTrip] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const contentArrange = [
-    { number: 1, content: 'Giờ đi sớm nhất' },
-    { number: 2, content: 'Giờ đi muộn nhất' },
-    { number: 3, content: 'Đánh giá cao nhất' },
+    // { number: 1, content: 'Giờ đi sớm nhất' },
+    // { number: 2, content: 'Giờ đi muộn nhất' },
+    // { number: 3, content: 'Đánh giá cao nhất' },
     { number: 4, content: 'Giá tăng dần' },
     { number: 5, content: 'Giá giảm dần' },
   ];
   const [selectArrange, setSelectArrange] = useState(0);
+  const [query, setQuery] = useState({
+    departure: null,
+    destination: null,
+    day_departure: null,
+    price_arrangement: selectArrange,
+  });
 
   const fetchSearchTrip = useCallback(async () => {
+    setQuery((prevQuery) => ({
+      ...prevQuery,
+      departure: location.state?.departure,
+      destination: location.state?.destination,
+      day_departure: location.state?.day_departure,
+    }));
     setIsLoading(true);
     try {
       const infoSearch = location.state?.infoSearch;
@@ -46,6 +58,12 @@ const SearchTrip = () => {
   }, [fetchSearchTrip]);
 
   const handleSearchTrip = async (data) => {
+    setQuery((prevQuery) => ({
+      ...prevQuery,
+      departure: data.departure,
+      destination: data.destination,
+      day_departure: data.day_departure,
+    }));
     try {
       const result = await searchTrip(data.departure, data.destination, data.day_departure);
       setListTrip(result);
@@ -54,9 +72,23 @@ const SearchTrip = () => {
     }
   };
 
-  const handleRadioChange = (number) => {
+  const handleRadioChange = async (number) => {
     setSelectArrange(number);
+    const { departure, destination, day_departure } = query;
+    console.log('query', query);
+
+    if (!departure || !destination || !day_departure) {
+      console.log('Thông tin tìm kiếm chưa đầy đủ.');
+      return;
+    }
+    try {
+      const result = await searchTrip(departure, destination, day_departure, number);
+      setListTrip(result);
+    } catch (error) {
+      console.log('Err fetch search trip', error);
+    }
   };
+
   return (
     <div>
       <Header />
@@ -80,7 +112,7 @@ const SearchTrip = () => {
             {isLoading
               ? 'Loading...'
               : Array.isArray(listTrip) && listTrip.length > 0
-              ? listTrip.map((trip) => <CarTicket key={trip.id} data={trip} />)
+              ? listTrip.map((trip, index) => <CarTicket key={index} data={trip} />)
               : 'Hiện tại không có chuyến xe nào phù hợp với yêu cầu của bạn'}
           </div>
         </div>
