@@ -1,0 +1,15 @@
+.list-radio {
+  .radio {
+    .radio-container {
+      width: 100%;
+      display: flex;
+      .input-radio {
+        width: 1rem;
+      }
+      .content {
+        font-size: 1rem;
+        margin: 0.4rem 0 0.4rem 0.4rem;
+      }
+    }
+  }
+}
