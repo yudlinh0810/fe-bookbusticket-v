@@ -1,102 +1,105 @@
 #search-container {
   margin-top: 5rem;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .select-d-d {
+  padding: 1rem;
+  border-radius: 0.8rem;
+  .s-l {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
-    width: 50rem;
+    .select-d-d {
+      width: 50rem;
+      display: flex;
+      gap: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
 
-    .select {
-      flex: 1;
-      position: relative;
+      .select {
+        flex: 1;
+        position: relative;
 
-      input {
-        width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        box-shadow: none;
-
-        &:focus {
-          border-color: #007bff;
-          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-      }
-
-      .location {
-        position: absolute;
-        top: calc(100% + 0.5rem); // Hiển thị ngay dưới input
-        left: 0;
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        max-height: 200px; // Giới hạn chiều cao
-        overflow-y: auto; // Bật cuộn dọc
-        width: 100%;
-        pointer-events: auto;
-        z-index: 10;
-        padding: 0.5rem 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-
-        &::-webkit-scrollbar {
-          display: none; // Ẩn thanh cuộn trên Chrome, Safari, Edge
-        }
-
-        li {
-          padding: 0.5rem 1rem;
-          cursor: pointer;
-          list-style: none;
-          white-space: nowrap; // Không xuống dòng
-
-          &:hover {
-            background-color: #f1f1f1;
+        input {
+          width: 100%;
+          padding: 0.5rem;
+          border-radius: 5px;
+          border: none;
+          outline: none;
+          &:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
           }
         }
 
-        > div {
-          padding: 0.5rem 1rem;
-          font-weight: bold;
-          color: #555;
+        .location {
+          position: absolute;
+          top: calc(100% + 0.5rem); // Hiển thị ngay dưới input
+          left: 0;
+          background: white;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          max-height: 20rem;
+          overflow-y: auto;
+          width: 100%;
+          pointer-events: auto;
+          z-index: 10;
+          padding: 0.5rem 0;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+          &::-webkit-scrollbar {
+            display: none; // Ẩn thanh cuộn trên Chrome, Safari, Edge
+          }
+
+          li {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            list-style: none;
+            white-space: nowrap; // Không xuống dòng
+
+            &:hover {
+              background-color: #f1f1f1;
+            }
+          }
+
+          > div {
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            color: #555;
+          }
+        }
+      }
+
+      .select-date {
+        flex: 1;
+        input[type='date'] {
+          width: 100%;
+          padding: 0.5rem;
+          // border: none;
+          &:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+          }
         }
       }
     }
 
-    .select-date {
-      flex: 0.5;
-
-      input {
-        width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #ccc;
+    .search-btn {
+      button {
+        padding: 0.9rem 2rem;
+        background-color: #007bff;
+        border: none;
+        color: white;
         border-radius: 5px;
-        outline: none;
+        cursor: pointer;
+        font-size: 1rem;
 
-        &:focus {
-          border-color: #007bff;
-          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        &:hover {
+          opacity: 0.8;
         }
-      }
-    }
-  }
-
-  .search-btn {
-    margin-top: 1rem;
-
-    button {
-      padding: 0.5rem 2rem;
-      background-color: #007bff;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-
-      &:hover {
-        background-color: #0056b3;
       }
     }
   }
