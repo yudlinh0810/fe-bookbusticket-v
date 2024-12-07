@@ -1,0 +1,15 @@
+.search-trip-container {
+  width: 60rem;
+  margin-top: 2rem;
+  border-radius: 0.8rem;
+  background-color: #fff;
+  display: flex;
+  .search-trip-container-r {
+    width: 13.5rem;
+    margin: 1rem 0 0 1rem;
+    border-right: 1px solid #ccc;
+  }
+  .search-trip-container-l {
+    margin: 1rem 0 0 1rem;
+  }
+}
