@@ -1,0 +1,30 @@
+.user-profile {
+  margin-top: 5rem;
+  .l-info {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    input {
+      width: 15rem;
+      padding: 0.3rem;
+      outline: none;
+      margin-left: 1rem;
+      border: none;
+      border-radius: 0.2rem;
+    }
+  }
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    .btn-update {
+      padding: 0.6rem;
+      border: none;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

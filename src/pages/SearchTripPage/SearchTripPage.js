@@ -26,7 +26,7 @@ const SearchTrip = () => {
     price_arrangement: selectArrange,
   });
 
-  const fetchSearchTrip = useCallback(async () => {
+  const fetchSearchTrip = async () => {
     setQuery((prevQuery) => ({
       ...prevQuery,
       departure: location.state?.departure,
@@ -49,13 +49,13 @@ const SearchTrip = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [location.state?.infoSearch]);
+  };
 
   useEffect(() => {
     if (location.state?.infoSearch) {
       fetchSearchTrip();
     }
-  }, [fetchSearchTrip]);
+  }, []);
 
   const handleSearchTrip = async (data) => {
     setQuery((prevQuery) => ({
