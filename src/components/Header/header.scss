@@ -76,6 +76,7 @@
       position: relative;
       cursor: pointer;
       .username {
+        text-align: center;
         text-decoration: none;
         white-space: nowrap;
         overflow: hidden;
@@ -95,6 +96,10 @@
             background: #ccc;
           }
           .feat-info {
+            color: #000;
+            text-decoration: none;
+          }
+          .feat-logout {
             color: #000;
             text-decoration: none;
           }
