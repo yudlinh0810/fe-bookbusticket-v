@@ -20,19 +20,13 @@ const SearchTrip = () => {
   ];
   const [selectArrange, setSelectArrange] = useState(0);
   const [query, setQuery] = useState({
-    departure: null,
-    destination: null,
-    day_departure: null,
+    departure: location.state?.infoSearch?.departure,
+    destination: location.state?.infoSearch?.destination,
+    day_departure: location.state?.infoSearch?.day_departure,
     price_arrangement: selectArrange,
   });
 
   const fetchSearchTrip = async () => {
-    setQuery((prevQuery) => ({
-      ...prevQuery,
-      departure: location.state?.departure,
-      destination: location.state?.destination,
-      day_departure: location.state?.day_departure,
-    }));
     setIsLoading(true);
     try {
       const infoSearch = location.state?.infoSearch;
@@ -75,7 +69,6 @@ const SearchTrip = () => {
   const handleRadioChange = async (number) => {
     setSelectArrange(number);
     const { departure, destination, day_departure } = query;
-    console.log('query', query);
 
     if (!departure || !destination || !day_departure) {
       console.log('Thông tin tìm kiếm chưa đầy đủ.');
