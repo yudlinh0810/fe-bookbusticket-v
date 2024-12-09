@@ -91,17 +91,12 @@
         right: 0;
         .feat {
           color: #000;
-          padding: 0.6rem;
-          &:hover {
-            background: #ccc;
-          }
-          .feat-info {
-            color: #000;
-            text-decoration: none;
-          }
-          .feat-logout {
-            color: #000;
-            text-decoration: none;
+          text-decoration: none;
+          .ft-item {
+            padding: 0.6rem;
+            &:hover {
+              background-color: #ccc;
+            }
           }
         }
       }

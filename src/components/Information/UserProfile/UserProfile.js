@@ -76,7 +76,9 @@ const UserProfile = () => {
                       style={{ width: '6rem', height: '6.25rem' }}
                     />
                   ) : (
-                    'Bạn chưa có ảnh đại diện kìa!'
+                    <p className='image-not' style={{ textAlign: 'center' }}>
+                      Bạn chưa có ảnh đại diện kìa
+                    </p>
                   )}
                 </div>
                 <div className='choose-file' style={{ display: 'flex' }}>

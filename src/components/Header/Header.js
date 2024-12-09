@@ -45,16 +45,14 @@ const Header = () => {
               <div className='btn-hd-r-li'>
                 <div className='username'>{user?.name}</div>
                 <div className='hidden'>
-                  <div className='feat'>
-                    <Link to={'/user-profile'} className='feat-info'>
-                      Thông tin cá nhân
-                    </Link>
-                  </div>
-                  <div className='feat'>
-                    <Link to={'/'} className='feat-logout' onClick={handleLogOut}>
+                  <Link to={'/user-profile'} className='feat'>
+                    <div className='ft-item'>Thông tin cá nhân</div>
+                  </Link>
+                  <Link to={'/'} className='feat'>
+                    <div className='ft-item' onClick={handleLogOut}>
                       Đăng xuất
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                 </div>
               </div>
             ) : (
