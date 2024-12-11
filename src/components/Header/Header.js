@@ -27,7 +27,7 @@ const Header = () => {
       </div>
       <ul className='header-right'>
         <li className='hd-r-li-w '>Đơn hàng của tôi</li>
-        <li className='hd-r-li-w '>Mở bán vé trên Vereghe</li>
+        <li className='hd-r-li-w '>Mở bán vé trên Vexetienich</li>
         <li className='hd-r-li-w '>Trở thành đối tác</li>
         <li className='hd-r-li'>
           <Link to={'/'}>
@@ -59,7 +59,7 @@ const Header = () => {
               <Link
                 to={'/login-register'}
                 className='btn-hd-r-li'
-                style={{ textDecoration: 'none' }}
+                style={{ backgroundColor: '#38b6ff', color: '#fff', textDecoration: 'none' }}
               >
                 Đăng Nhập
               </Link>
