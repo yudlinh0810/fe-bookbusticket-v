@@ -28,7 +28,8 @@ const HomePage = () => {
   ];
 
   const handleSearchTrip = (infoSearch) => {
-    navigate(`/search-trip`, { state: { infoSearch } });
+    const params = new URLSearchParams(infoSearch);
+    navigate(`/search-trip?${params}`);
   };
   return (
     <div>

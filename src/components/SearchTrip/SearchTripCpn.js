@@ -19,6 +19,8 @@ const SearchTrip = ({ onSubmit }) => {
   const [currentDate, setCurrentDate] = useState('');
   const [selectDate, setSelectDate] = useState(currentDate);
   const dateInputRef = useRef(null);
+  const [triangleStateDep, setTriangleStateDep] = useState(false);
+  const [triangleStateDes, setTriangleStateDes] = useState(false);
   // const slideArr = [
   //   {
   //     title: `LET'S EXPLORE THE VIETNAM`,
@@ -98,6 +100,13 @@ const SearchTrip = ({ onSubmit }) => {
 
   const handleFocus = (inputType) => {
     setFocusedInput(inputType);
+    if (inputType === 'departure') {
+      setTriangleStateDep(true);
+      setTriangleStateDes(false);
+    } else {
+      setTriangleStateDes(true);
+      setTriangleStateDep(false);
+    }
   };
 
   const handleBlur = (e) => {
@@ -106,6 +115,8 @@ const SearchTrip = ({ onSubmit }) => {
       return;
     }
     setFocusedInput(null);
+    setTriangleStateDep(false);
+    setTriangleStateDes(false);
   };
 
   const handleDateChange = (e) => {
@@ -175,12 +186,16 @@ const SearchTrip = ({ onSubmit }) => {
                   onBlur={handleBlur}
                   onChange={handleDepartureSearch}
                   placeholder='Điểm đi'
+                  style={{ position: 'relative' }}
                 />
               </div>
+              <span className={triangleStateDep ? 'triangle' : ''}></span>
               <ul
                 className='location location-departure'
                 style={{
                   display: focusedInput === 'departure' ? 'block' : 'none',
+                  position: 'absolute',
+                  top: '-21.1rem',
                 }}
               >
                 <div>Địa điểm phổ biến</div>
@@ -222,6 +237,7 @@ const SearchTrip = ({ onSubmit }) => {
                   placeholder='Điểm đến'
                 />
               </div>
+              <span className={triangleStateDes ? 'triangle' : ''}></span>
               <ul
                 className='location location-destination'
                 style={{

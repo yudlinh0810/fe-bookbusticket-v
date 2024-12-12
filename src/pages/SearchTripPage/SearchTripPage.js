@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import SearchTripCpn from '../../components/SearchTrip/SearchTripCpn';
 import { searchTrip } from '../../services/Trip';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import CarTicket from '../../components/CarTicket/CarTicket';
 import './SearchTripPage.scss';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
 
 const SearchTrip = () => {
-  const location = useLocation();
+  const [searchParams] = useSearchParams();
   const [listTrip, setListTrip] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const contentArrange = [
@@ -20,24 +20,22 @@ const SearchTrip = () => {
   ];
   const [selectArrange, setSelectArrange] = useState(0);
   const [query, setQuery] = useState({
-    departure: location.state?.infoSearch?.departure,
-    destination: location.state?.infoSearch?.destination,
-    day_departure: location.state?.infoSearch?.day_departure,
+    departure: searchParams.get('departure'),
+    destination: searchParams.get('destination'),
+    day_departure: searchParams.get('day_departure'),
     price_arrangement: selectArrange,
   });
+  const navigate = useNavigate();
 
   const fetchSearchTrip = async () => {
     setIsLoading(true);
     try {
-      const infoSearch = location.state?.infoSearch;
-      if (infoSearch) {
-        const result = await searchTrip(
-          infoSearch.departure,
-          infoSearch.destination,
-          infoSearch.day_departure
-        );
-        setListTrip(result);
-      }
+      const result = await searchTrip(
+        searchParams.get('departure'),
+        searchParams.get('destination'),
+        searchParams.get('day_departure')
+      );
+      setListTrip(result);
     } catch (error) {
       console.log('Err fetch search trip', error);
     } finally {
@@ -46,7 +44,11 @@ const SearchTrip = () => {
   };
 
   useEffect(() => {
-    if (location.state?.infoSearch) {
+    if (
+      searchParams.get('departure') &&
+      searchParams.get('destination') &&
+      searchParams.get('day_departure')
+    ) {
       fetchSearchTrip();
     }
   }, []);
@@ -59,6 +61,8 @@ const SearchTrip = () => {
       day_departure: data.day_departure,
     }));
     try {
+      const params = new URLSearchParams(data);
+      navigate(`/search-trip?${params}`);
       const result = await searchTrip(data.departure, data.destination, data.day_departure);
       setListTrip(result);
     } catch (error) {
