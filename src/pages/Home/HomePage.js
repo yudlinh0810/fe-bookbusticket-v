@@ -34,8 +34,10 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <div id='home-container' style={{ position: 'relative' }}>
+      <div id='home-container'>
         <Slide data={slideArr} />
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <SearchTripCpn onSubmit={handleSearchTrip} />
       </div>
     </div>

@@ -1,7 +1,22 @@
 import moment from 'moment';
 import './CarTicket.scss';
+import { useNavigate } from 'react-router-dom';
+import { getAllTripSeat } from '../../services/Trip';
 
 const CarTicket = ({ data }) => {
+  const navigate = useNavigate();
+  const handleSelectTrip = async () => {
+    const getAllSeat = await getAllTripSeat(data.id);
+    //
+    const query = {
+      departure: data.departure_location,
+      id: data.id,
+      destination: data.destination_location,
+      day_departure: moment(data.day_departure.slice(0, 10), 'YYYY/MM/DD').format('DD-MM-YYYY'),
+    };
+    const params = new URLSearchParams(query);
+    navigate(`/details-trip?${params}`, { state: { tripData: data, tripSeatData: getAllSeat } });
+  };
   return (
     <div className='ticket-container'>
       <div className='bus-info-t'>
@@ -26,7 +41,7 @@ const CarTicket = ({ data }) => {
           </div>
           <div className='btn'>
             <span></span>
-            <button>Chọn chuyến</button>
+            <button onClick={handleSelectTrip}>Chọn chuyến</button>
           </div>
         </div>
       </div>

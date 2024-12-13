@@ -144,17 +144,7 @@ const SearchTrip = ({ onSubmit }) => {
   // };
 
   return (
-    <div
-      className=''
-      style={{
-        width: '100wh',
-        marginTop: '1rem',
-        position: 'absolute',
-        top: '80%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-      }}
-    >
+    <div className=''>
       {/* <Slide data={slideArr} /> */}
 
       <div id='search-container'>

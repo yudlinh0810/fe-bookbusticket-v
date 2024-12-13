@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import VerifyOTP from './components/Information/VerifyOTP/VerifyOTP';
 import UserProfile from './components/Information/UserProfile/UserProfile';
 import SearchTrip from './pages/SearchTripPage/SearchTripPage';
+import DetailsTrip from './pages/DetailsTrip/DetailsTrip';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/verify-email' element={<VerifyOTP />} />
         <Route path='/user-profile' element={<UserProfile />} />
         <Route path='/search-trip' element={<SearchTrip />} />
+        <Route path='/details-trip' element={<DetailsTrip />} />
       </Routes>
       <ToastContainer
         position='top-right'

@@ -14,4 +14,10 @@ const searchTrip = (departure, destination, day_departure, price_arrangement) =>
     .then((result) => result[0].data);
 };
 
-export { searchTrip };
+const getAllTripSeat = (idTrip) => {
+  return bookBusTicketAPI
+    .get(`${trip}/get-all-trip-seat/${idTrip}`)
+    .then((result) => result[0].data);
+};
+
+export { searchTrip, getAllTripSeat };
