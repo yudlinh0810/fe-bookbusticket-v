@@ -41,19 +41,35 @@ const Header = () => {
         </li>
         {location.pathname === '/login-register' ? null : (
           <li className='hd-r-li'>
-            {user?.name ? (
+            {user ? (
               <div className='btn-hd-r-li'>
                 <div className='username'>{user?.name}</div>
-                <div className='hidden'>
-                  <Link to={'/user-profile'} className='feat'>
-                    <div className='ft-item'>Thông tin cá nhân</div>
-                  </Link>
-                  <Link to={'/'} className='feat'>
-                    <div className='ft-item' onClick={handleLogOut}>
-                      Đăng xuất
-                    </div>
-                  </Link>
-                </div>
+                {user?.id.slice(0, 3) === 'CTM' ? (
+                  <div className='hidden' style={{ zIndex: '10' }}>
+                    <Link to={'/user-profile'} className='feat'>
+                      <div className='ft-item'>Thông tin cá nhân</div>
+                    </Link>
+                    <Link to={'/'} className='feat'>
+                      <div className='ft-item' onClick={handleLogOut}>
+                        Đăng xuất
+                      </div>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className='hidden' style={{ zIndex: '10' }}>
+                    <Link to={'/user-profile'} className='feat'>
+                      <div className='ft-item'>Thông tin cá nhân</div>
+                    </Link>
+                    <Link to={'/admin'} className='feat'>
+                      <div className='ft-item'>Quản lý hệ thống</div>
+                    </Link>
+                    <Link to={'/'} className='feat'>
+                      <div className='ft-item' onClick={handleLogOut}>
+                        Đăng xuất
+                      </div>
+                    </Link>
+                  </div>
+                )}
               </div>
             ) : (
               <Link

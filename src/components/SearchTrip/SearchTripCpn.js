@@ -3,6 +3,7 @@ import { getAllDeparture } from '../../services/Departure';
 import { getAllDestination } from '../../services/destination';
 import './SearchTripCpn.scss';
 import moment from 'moment';
+import { useLocation } from 'react-router-dom';
 // import Slide from '../Slide/Slide';
 // import slide_img from '../../assets/images/slide-img.jpg';
 // import slide2_img from '../../assets/images/slide2-img.jpg';
@@ -21,6 +22,7 @@ const SearchTrip = ({ onSubmit }) => {
   const dateInputRef = useRef(null);
   const [triangleStateDep, setTriangleStateDep] = useState(false);
   const [triangleStateDes, setTriangleStateDes] = useState(false);
+  const location = useLocation();
   // const slideArr = [
   //   {
   //     title: `LET'S EXPLORE THE VIETNAM`,
@@ -179,13 +181,23 @@ const SearchTrip = ({ onSubmit }) => {
                   style={{ position: 'relative' }}
                 />
               </div>
-              <span className={triangleStateDep ? 'triangle' : ''}></span>
+              <span
+                className={
+                  location.pathname === '/'
+                    ? triangleStateDep
+                      ? 'triangle-t'
+                      : ''
+                    : triangleStateDep
+                    ? 'triangle-b'
+                    : ''
+                }
+              ></span>
               <ul
                 className='location location-departure'
                 style={{
                   display: focusedInput === 'departure' ? 'block' : 'none',
                   position: 'absolute',
-                  top: '-21.1rem',
+                  top: location.pathname === '/' ? '-21.1rem' : '3.4rem',
                 }}
               >
                 <div>Địa điểm phổ biến</div>
@@ -227,11 +239,23 @@ const SearchTrip = ({ onSubmit }) => {
                   placeholder='Điểm đến'
                 />
               </div>
-              <span className={triangleStateDes ? 'triangle' : ''}></span>
+              <span
+                className={
+                  location.pathname === '/'
+                    ? triangleStateDes
+                      ? 'triangle-t'
+                      : ''
+                    : triangleStateDes
+                    ? 'triangle-b'
+                    : ''
+                }
+              ></span>
               <ul
                 className='location location-destination'
                 style={{
                   display: focusedInput === 'destination' ? 'block' : 'none',
+                  position: 'absolute',
+                  top: location.pathname === '/' ? '-21.1rem' : '3.4rem',
                 }}
               >
                 <div>Địa điểm phổ biến</div>

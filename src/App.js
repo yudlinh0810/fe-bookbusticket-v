@@ -8,6 +8,9 @@ import VerifyOTP from './components/Information/VerifyOTP/VerifyOTP';
 import UserProfile from './components/Information/UserProfile/UserProfile';
 import SearchTrip from './pages/SearchTripPage/SearchTripPage';
 import DetailsTrip from './pages/DetailsTrip/DetailsTrip';
+import Admin from './pages/Admin/Admin';
+import CustomerManager from './pages/Admin/CustomerManager/CustomerManager';
+import StaffLogin from './pages/Admin/StaffLogin/StaffLogin';
 
 function App() {
   return (
@@ -19,6 +22,10 @@ function App() {
         <Route path='/user-profile' element={<UserProfile />} />
         <Route path='/search-trip' element={<SearchTrip />} />
         <Route path='/details-trip' element={<DetailsTrip />} />
+        {/* Admin */}
+        <Route path='/staff-login' element={<StaffLogin />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/manage-customer' element={<CustomerManager />}></Route>
       </Routes>
       <ToastContainer
         position='top-right'

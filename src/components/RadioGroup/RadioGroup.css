@@ -1,0 +1,11 @@
+.list-radio .radio .radio-container {
+  width: 100%;
+  display: flex;
+}
+.list-radio .radio .radio-container .input-radio {
+  width: 1rem;
+}
+.list-radio .radio .radio-container .content {
+  font-size: 1rem;
+  margin: 0.4rem 0 0.4rem 0.4rem;
+}/*# sourceMappingURL=RadioGroup.css.map */

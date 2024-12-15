@@ -1,0 +1,15 @@
+.search-trip-container {
+  margin-top: 1rem;
+  display: flex;
+  width: 56rem;
+  background-color: #fff;
+  border-radius: 0.8rem;
+}
+.search-trip-container-r {
+  margin: 1rem 0 0 1rem;
+  width: 13.5rem;
+  border-right: 1px solid #ccc;
+}
+.search-trip-container .search-trip-container-l {
+  margin: 1rem 0 0 1rem;
+}/*# sourceMappingURL=SearchTripPage.css.map */

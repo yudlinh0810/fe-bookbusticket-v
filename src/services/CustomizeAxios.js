@@ -14,4 +14,17 @@ bookBusTicketAPI.interceptors.response.use(
   }
 );
 
-export default bookBusTicketAPI;
+const vnPayAPI = axios.create({
+  baseURL: `http://localhost:3004`,
+});
+
+vnPayAPI.interceptors.response.use(
+  (response) => {
+    return [response.data || []];
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export { bookBusTicketAPI, vnPayAPI };

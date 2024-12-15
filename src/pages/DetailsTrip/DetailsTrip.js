@@ -1,7 +1,8 @@
 import './DetailsTrip.scss';
 import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { createPayment } from '../../services/Payment';
 
 const DetailsTrip = () => {
   const location = useLocation();
@@ -51,8 +52,22 @@ const DetailsTrip = () => {
     });
   };
 
-  const priceTotal = selectedSeats.reduce((total, seat) => total + seat.price, 0);
-
+  const priceTotal = selectedSeats.reduce((total, seat) => total + Number(seat.price), 0);
+  const handleVnPay = async () => {
+    const data = {
+      amount: priceTotal * 1000,
+      bankCode: 'NCB',
+      seat: selectedSeats.map((seat) => seat.seat_position),
+    };
+    console.log('data', JSON.stringify(data));
+    const result = await createPayment(data);
+    if (result) {
+      const id = result[0].id;
+      const code = result[0].code;
+      console.log('url', result[0].url);
+      window.location.href = result[0].url;
+    }
+  };
   return (
     <div className='details-trip-container'>
       <Header />
@@ -100,12 +115,16 @@ const DetailsTrip = () => {
           >
             <div
               className='top'
-              style={{ width: '30rem', display: 'flex', justifyContent: 'space-around' }}
+              style={{
+                width: '30rem',
+                display: 'flex',
+                justifyContent: 'space-around',
+              }}
             >
               <span>Chọn ghế</span>
               <span>Thông tin chi tiết</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', height: '20rem' }}>
               <div
                 className='first-row'
                 style={{ width: '11.06rem', height: '2.25rem', textAlign: 'center' }}
@@ -236,15 +255,28 @@ const DetailsTrip = () => {
               borderRadius: '0.6rem',
             }}
           >
-            <h4>Ghế đã chọn</h4>
-            <div className='' style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {selectedSeats.map((seat, index) => (
-                <span style={{ width: '2rem', marginRight: '1rem' }} key={index}>
-                  {seat.seat_position}
-                </span>
-              ))}
+            <div style={{ display: 'flex' }}>
+              <h4>Ghế đã chọn:</h4>
+              <div className='' style={{ display: 'flex', flexWrap: 'wrap', width: '17rem' }}>
+                {selectedSeats.map((seat, index) => (
+                  <span style={{ width: '2rem', marginRight: '1rem' }} key={index}>
+                    {seat.seat_position}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div>Tổng giá {priceTotal.toLocaleString()}VND</div>
+            <p>Số lượng: {selectedSeats.length}</p>
+            <div>
+              Tổng giá: {priceTotal > 0 ? priceTotal.toLocaleString().concat(',000 VND') : ''}
+            </div>
+            <div>
+              <span>Thanh toán:</span>
+              <img
+                onClick={handleVnPay}
+                src='https://pay.vnpay.vn/images/brands/logo-en.svg'
+                alt='vnpay-image'
+              />
+            </div>
           </div>
         </div>
       </div>

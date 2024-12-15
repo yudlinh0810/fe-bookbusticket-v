@@ -30,8 +30,7 @@ const UserProfile = () => {
     formData.append('file', file || null);
     formData.append('data', JSON.stringify(data));
     const result = await updateCustomer(formData);
-    console.log('status', JSON.parse(result).status);
-    if (JSON.parse(result).status === 'OK') {
+    if (result.status === 'OK') {
       toast.success('Cập nhật thông tin thành công');
       const token = { access_token: localStorage.getItem('access_token') };
       const userNew = await fetchCustomer(token);

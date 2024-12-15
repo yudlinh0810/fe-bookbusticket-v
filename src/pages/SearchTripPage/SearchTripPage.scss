@@ -1,12 +1,12 @@
 .search-trip-container {
-  width: 60rem;
-  margin-top: 5rem;
-  border-radius: 0.8rem;
-  background-color: #fff;
+  margin-top: 1rem;
   display: flex;
-  .search-trip-container-r {
-    width: 13.5rem;
+  width: 56rem;
+  background-color: #fff;
+  border-radius: 0.8rem;
+  &-r {
     margin: 1rem 0 0 1rem;
+    width: 13.5rem;
     border-right: 1px solid #ccc;
   }
   .search-trip-container-l {

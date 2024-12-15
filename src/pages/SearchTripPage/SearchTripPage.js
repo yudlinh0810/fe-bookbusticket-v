@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/Header/Header';
-import SearchTripCpn from '../../components/SearchTrip/SearchTripCpn';
-import { searchTrip } from '../../services/Trip';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CarTicket from '../../components/CarTicket/CarTicket';
-import './SearchTripPage.scss';
+import Header from '../../components/Header/Header';
 import RadioGroup from '../../components/RadioGroup/RadioGroup';
+import SearchTripCpn from '../../components/SearchTrip/SearchTripCpn';
+import { searchTrip } from '../../services/Trip';
+import './SearchTripPage.scss';
 
 const SearchTrip = () => {
   const [searchParams] = useSearchParams();
@@ -87,9 +87,11 @@ const SearchTrip = () => {
   };
 
   return (
-    <div>
+    <div style={{ width: '100wh' }}>
       <Header />
-      <SearchTripCpn onSubmit={handleSearchTrip} />
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <SearchTripCpn onSubmit={handleSearchTrip} />
+      </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div className='search-trip-container'>
           <div className='search-trip-container-r'>

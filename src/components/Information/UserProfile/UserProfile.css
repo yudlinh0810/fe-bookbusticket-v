@@ -1,0 +1,30 @@
+.user-profile {
+  margin-top: 5rem;
+}
+.user-profile .l-info {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.user-profile .l-info input {
+  width: 15rem;
+  padding: 0.3rem;
+  outline: none;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 0.2rem;
+}
+.user-profile .btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+.user-profile .btn-container .btn-update {
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+}
+.user-profile .btn-container .btn-update:hover {
+  opacity: 0.8;
+}/*# sourceMappingURL=UserProfile.css.map */

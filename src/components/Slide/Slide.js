@@ -13,7 +13,7 @@ const Slide = ({ data }) => {
   const autoSlide = () => {
     intervalRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % data.length);
-    }, 3000);
+    }, 4000);
   };
 
   const resetInterval = () => {

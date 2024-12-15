@@ -1,4 +1,4 @@
-import bookBusTicketAPI from './CustomizeAxios';
+import { bookBusTicketAPI } from './CustomizeAxios';
 
 const trip = '/trip';
 

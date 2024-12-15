@@ -1,4 +1,4 @@
-import bookBusTicketAPI from './CustomizeAxios';
+import { bookBusTicketAPI } from './CustomizeAxios';
 
 const ctm = '/customer';
 
@@ -33,11 +33,50 @@ const fetchCustomer = (token) => {
 const updateCustomer = (Update) => {
   return bookBusTicketAPI
     .post(`${ctm}/update-customer`, Update)
-    .then((response) => JSON.stringify(response[0]))
+    .then((response) => response[0])
     .catch((error) => {
       console.error('Fetch Customer Error: ', error);
       throw error;
     });
 };
 
-export { login, register, verifyEmail, fetchCustomer, updateCustomer };
+const getAllCustomer = () => {
+  return bookBusTicketAPI
+    .get(`${ctm}/get-all-customer`)
+    .then((response) => response[0])
+    .catch((error) => {
+      console.error('Fetch Customer Error: ', error);
+      throw error;
+    });
+};
+
+const deleteCustomer = (id) => {
+  return bookBusTicketAPI
+    .delete(`${ctm}/delete-customer/${id}`)
+    .then((response) => response[0])
+    .catch((error) => {
+      console.error('Fetch Customer Error: ', error);
+      throw error;
+    });
+};
+
+const createCustomer = (data) => {
+  return bookBusTicketAPI
+    .post(`${ctm}/create-customer/`, data)
+    .then((response) => response[0])
+    .catch((error) => {
+      console.error('Fetch Customer Error: ', error);
+      throw error;
+    });
+};
+
+export {
+  login,
+  register,
+  verifyEmail,
+  fetchCustomer,
+  updateCustomer,
+  getAllCustomer,
+  deleteCustomer,
+  createCustomer,
+};
