@@ -13,16 +13,16 @@ const SidebarAdmin = () => {
         </li>
         <li className='item'>
           <NavLink
-            to='/admin/manage-customer'
+            to='/admin/customer-manager'
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             <i className='fa-regular fa-user'></i>
-            <span>Người dùng</span>
+            <span>Khách hàng</span>
           </NavLink>
         </li>
         <li className='item'>
           <NavLink
-            to='/admin/manage-driver'
+            to='/admin/driver-manager'
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             <i className='fa-solid fa-user'></i>
@@ -30,19 +30,19 @@ const SidebarAdmin = () => {
           </NavLink>
         </li>
         <li className='item'>
-          <NavLink to='/admin/manage-car' className={({ isActive }) => (isActive ? 'active' : '')}>
+          <NavLink to='/admin/car-manager' className={({ isActive }) => (isActive ? 'active' : '')}>
             <i className='fa-solid fa-car'></i>
             <span>Xe</span>
           </NavLink>
         </li>
         <li className='item'>
-          <NavLink to='/admin/manage-trip'>
+          <NavLink to='/admin/trip-manager'>
             <i className='fa-solid fa-car'></i>
             <span>Chuyến xe</span>
           </NavLink>
         </li>
         <li className='item'>
-          <NavLink to='/admin/manage-ticket'>
+          <NavLink to='/admin/ticket-manager'>
             <i className='fa-solid fa-car'></i>
             <span>vé xe</span>
           </NavLink>

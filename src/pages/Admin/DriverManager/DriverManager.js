@@ -1,35 +1,31 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import AdminFooter from '../../../components/AdminFooter/AdminFooter';
 import AdminHeader from '../../../components/AdminHeader/AdminHeader';
 import SidebarAdmin from '../../../components/SidebarAdmin/SidebarAdmin';
-import {
-  createCustomer,
-  deleteCustomer,
-  getAllCustomer,
-  updateCustomer,
-} from '../../../services/Customer';
-import './CustomerManager.scss';
+import { createDriver, deleteDriver, updateDriver } from '../../../services/driver';
+import './DriverManager.scss';
 import { Modal, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { fetchGetAllDriver } from '../../../services/driver';
 
 const CustomerManager = () => {
   const [page, setPage] = useState(0);
-  const [listUser, setListUser] = useState(0);
+  const [driverList, setDriverList] = useState([]);
   const [show, setShow] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [showUpdate, setShowUpdate] = useState(false);
-  const [newUser, setNewUser] = useState({});
-  const [userUpdate, setUserUpdate] = useState({});
-  const [idUserDelete, setIdUserUpdate] = useState('');
-  const [userCompare, setUserCompare] = useState({});
+  const [newDriver, setNewDriver] = useState({});
+  const [driverUpdate, setDriverUpdate] = useState({});
+  const [idDriverDelete, setIdDriverUpdate] = useState('');
+  const [driverCompare, setDriverCompare] = useState({});
   useEffect(() => {
-    getAllUser();
+    getAllDriver();
   }, [page]);
 
-  const getAllUser = async () => {
-    let res = await getAllCustomer(page);
+  const getAllDriver = async () => {
+    let res = await fetchGetAllDriver();
     if (res && res.status === 'OK') {
-      setListUser(res);
+      setDriverList(res.data);
     }
   };
 
@@ -53,21 +49,21 @@ const CustomerManager = () => {
 
   const handleDeleteShow = (id) => {
     setShowDelete(true);
-    setIdUserUpdate(id);
+    setIdDriverUpdate(id);
   };
 
   const handleShowUpdate = (user) => {
     setShowUpdate(true);
-    setUserUpdate(user);
-    setUserCompare(user);
+    setDriverUpdate(user);
+    setDriverCompare(user);
   };
 
   const handleCloseUpdate = () => {
     setShowUpdate(false);
   };
 
-  const handleAddNewUser = async () => {
-    let { email, name, password, phone } = newUser;
+  const handleAddNewDriver = async () => {
+    let { email, name, password, phone } = newDriver;
     if (!email || !name || !password || !phone) {
       toast.error('Vui lòng nhập đầy đủ thông tin!');
       return;
@@ -85,13 +81,13 @@ const CustomerManager = () => {
       toast.error('Email không hợp lệ!');
       return;
     }
-    console.log('new', newUser);
-    let res = await createCustomer(newUser);
+    console.log('new', newDriver);
+    let res = await createDriver(newDriver);
 
     if (res.status === 'OK') {
       toast.success('Bạn đã thêm thành công!');
-      getAllUser();
-      setNewUser({});
+      getAllDriver();
+      setNewDriver({});
       handleClose();
     } else {
       toast.error('Thêm thất bại!');
@@ -99,16 +95,16 @@ const CustomerManager = () => {
     }
   };
   useLayoutEffect(() => {
-    // Khi userUpdate thay đổi, reset lại ảnh đại diện
-    if (userUpdate?.portrait) {
-      setPreviewImage(userUpdate.portrait);
+    // Khi driverUpdate thay đổi, reset lại ảnh đại diện
+    if (driverUpdate?.portrait) {
+      setPreviewImage(driverUpdate.portrait);
     } else {
       setPreviewImage(''); // Reset ảnh khi không có portrait
     }
-  }, [userUpdate?.portrait]);
+  }, [driverUpdate?.portrait]);
   const [file, setFile] = useState(null);
-  const [previewImage, setPreviewImage] = useState(userUpdate?.portrait);
-  console.log('portrait', userUpdate?.portrait);
+  const [previewImage, setPreviewImage] = useState(driverUpdate?.portrait);
+  console.log('portrait', driverUpdate?.portrait);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -124,23 +120,23 @@ const CustomerManager = () => {
     }
   };
 
-  const handleUpdateUser = async (event) => {
+  const handleUpdateDriver = async (event) => {
     event.preventDefault();
     const formData = new FormData();
     if (file) {
       formData.append('file', file);
     }
-    formData.append('data', JSON.stringify(userUpdate));
+    formData.append('data', JSON.stringify(driverUpdate));
     console.log('update', formData);
-    if (userUpdate !== userCompare || file) {
-      let res = await updateCustomer(formData);
+    if (driverUpdate !== driverCompare || file) {
+      let res = await updateDriver(formData);
       if (res && res.status === 'OK') {
         toast.success('Bạn đã cập nhật thành công!');
         handleCloseUpdate();
-        getAllUser();
+        getAllDriver();
         setFile(null);
-        setUserUpdate({});
-        setUserCompare({});
+        setDriverUpdate({});
+        setDriverCompare({});
       } else {
         handleClose();
         toast.error('Cập nhật thất bại!');
@@ -151,36 +147,36 @@ const CustomerManager = () => {
   };
 
   const handleDeleteUser = async () => {
-    if (idUserDelete) {
-      let res = await deleteCustomer(idUserDelete);
+    if (idDriverDelete) {
+      let res = await deleteDriver(idDriverDelete);
       console.log('res', res);
       if (res.status === 'OK') {
         toast.success('Bạn đã xóa thành công!');
         handleDeleteClose();
-        setIdUserUpdate('');
-        getAllUser();
+        setIdDriverUpdate('');
+        getAllDriver();
       } else {
         toast.error('Xóa thất bại!');
         handleDeleteClose();
-        setIdUserUpdate('');
+        setIdDriverUpdate('');
       }
     }
   };
 
   return (
-    <div className='container-manage-user'>
+    <div className='container-manage-driver'>
       <AdminHeader />
       <div className='content'>
         <SidebarAdmin />
         <div className='right'>
           <div className='top'>
-            <h3>Quản lý người dùng</h3>
+            <h3>Quản lý tài xế</h3>
             <button className='btn btn-primary' onClick={() => handleShow()}>
               + Thêm mới
             </button>
           </div>
           <div className='data'>
-            {listUser && listUser?.data?.length > 0 ? (
+            {driverList && driverList?.length > 0 ? (
               <table className='table-manage-users'>
                 <thead>
                   <tr>
@@ -188,17 +184,19 @@ const CustomerManager = () => {
                     <th>Email</th>
                     <th>Name</th>
                     <th>Phone number</th>
+                    <th>license</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {listUser?.data?.map((item, index) => {
+                  {driverList?.map((item, index) => {
                     return (
                       <tr key={index}>
                         <td>{item.id}</td>
                         <td>{item.email}</td>
                         <td>{item.name}</td>
                         <td>{item.phone}</td>
+                        <td>{new Date(item.driver_license_receipt_date).toLocaleDateString()}</td>
                         <td>
                           <button
                             className='btn btn-warning update'
@@ -242,8 +240,8 @@ const CustomerManager = () => {
                   className='form-control'
                   id='exampleFormControlInput1'
                   placeholder='name@example.com'
-                  value={newUser.email}
-                  onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                  value={newDriver.email}
+                  onChange={(e) => setNewDriver({ ...newDriver, email: e.target.value })}
                 />
               </div>
               <div className='mb-3 col-6'>
@@ -255,8 +253,8 @@ const CustomerManager = () => {
                   className='form-control'
                   id='exampleFormControlInput1'
                   placeholder='Họ và tên'
-                  value={newUser.name}
-                  onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                  value={newDriver.name}
+                  onChange={(e) => setNewDriver({ ...newDriver, name: e.target.value })}
                 />
               </div>
               <div className='mb-3 col-6'>
@@ -268,8 +266,8 @@ const CustomerManager = () => {
                   className='form-control'
                   id='exampleFormControlInput1'
                   placeholder='Mật khẩu'
-                  value={newUser.password}
-                  onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                  value={newDriver.password}
+                  onChange={(e) => setNewDriver({ ...newDriver, password: e.target.value })}
                 />
               </div>
               <div className='mb-3 col-6'>
@@ -281,8 +279,8 @@ const CustomerManager = () => {
                   className='form-control'
                   id='exampleFormControlInput1'
                   placeholder='Số điện thoại'
-                  value={newUser.phone}
-                  onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
+                  value={newDriver.phone}
+                  onChange={(e) => setNewDriver({ ...newDriver, phone: e.target.value })}
                 />
               </div>
             </div>
@@ -291,23 +289,23 @@ const CustomerManager = () => {
             <Button variant='secondary' onClick={handleClose}>
               Close
             </Button>
-            <Button variant='primary' onClick={handleAddNewUser}>
+            <Button variant='primary' onClick={handleAddNewDriver}>
               Thêm mới
             </Button>
           </Modal.Footer>
         </Modal>
       </div>
 
-      {/* Modal update user */}
+      {/* Modal update driver */}
       <Modal show={showUpdate} onHide={handleCloseUpdate} className='modal-lg'>
         <Modal.Header closeButton>
-          <Modal.Title>Cập nhật người dùng</Modal.Title>
+          <Modal.Title>Cập nhật tài xế</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className='row'>
-            <form onSubmit={handleUpdateUser}>
+            <form onSubmit={handleUpdateDriver}>
               <div className='user-details' style={{ display: 'flex' }}>
-                <div className='r' style={{ marginRight: '10rem' }}>
+                <div className='r' style={{ marginRight: '5rem' }}>
                   <div
                     className='portrait'
                     style={{
@@ -341,33 +339,35 @@ const CustomerManager = () => {
                     />
                   </div>
                 </div>
-                <div className='l'>
-                  <div className='l-info'>
+                <div className='l d-flex flex-wrap gap-4'>
+                  <div className='l-info' style={{ width: '11.5rem' }}>
                     <label>Email:</label>
-                    <input defaultValue={userUpdate.email} readOnly />
+                    <input defaultValue={driverUpdate.email} readOnly />
                   </div>
-                  <div className='l-info'>
+                  <div className='l-info' style={{ width: '11.5rem' }}>
                     <label>Tên:</label>
                     <input
                       placeholder='Tên của bạn'
-                      value={userUpdate.name || ''}
-                      onChange={(e) => setUserUpdate({ ...userUpdate, name: e.target.value })}
+                      value={driverUpdate.name || ''}
+                      onChange={(e) => setDriverUpdate({ ...driverUpdate, name: e.target.value })}
                     />
                   </div>
-                  <div className='l-info'>
+                  <div className='l-info' style={{ width: '11.5rem' }}>
                     <label>SĐT:</label>
                     <input
                       placeholder='Số điện thoại'
-                      value={userUpdate.phone || ''}
-                      onChange={(e) => setUserUpdate({ ...userUpdate, phone: e.target.value })}
+                      value={driverUpdate.phone || ''}
+                      onChange={(e) => setDriverUpdate({ ...driverUpdate, phone: e.target.value })}
                     />
                   </div>
-                  <div className='l-info'>
+                  <div className='l-info' style={{ width: '11.5rem' }}>
                     <label>Địa chỉ:</label>
                     <input
                       placeholder='Địa chỉ'
-                      value={userUpdate.address || ''}
-                      onChange={(e) => setUserUpdate({ ...userUpdate, address: e.target.value })}
+                      value={driverUpdate.address || ''}
+                      onChange={(e) =>
+                        setDriverUpdate({ ...driverUpdate, address: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -379,7 +379,7 @@ const CustomerManager = () => {
           <Button variant='secondary' onClick={handleCloseUpdate}>
             Close
           </Button>
-          <Button variant='primary' onClick={handleUpdateUser}>
+          <Button variant='primary' onClick={handleUpdateDriver}>
             Cập nhật
           </Button>
         </Modal.Footer>

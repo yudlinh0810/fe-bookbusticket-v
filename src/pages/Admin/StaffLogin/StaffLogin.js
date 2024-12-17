@@ -1,15 +1,13 @@
 import './StaffLogin.scss';
 import Header from '../../../components/Header/Header';
 import DropWater from '../../../components/Animations/DropWater/DropWater';
-import { fetchCustomer } from '../../../services/Customer';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '../../../stores/UserStore';
 import { fetchStaff, staffLogin } from '../../../services/Staff';
 
 const StaffLogin = () => {
-  const { user, setUser } = useUserStore();
-  console.log('staff', user);
+  const { setUser } = useUserStore();
 
   const navigate = useNavigate();
 
@@ -24,7 +22,6 @@ const StaffLogin = () => {
       if (res.status === 'OK') {
         localStorage.setItem('access_token', res.access_token);
         const data = await fetchStaff(res.access_token);
-        console.log('data', data);
         const details = {
           id: data.id,
           email: data.email,

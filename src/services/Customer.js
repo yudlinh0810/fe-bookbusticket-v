@@ -30,9 +30,9 @@ const fetchCustomer = (token) => {
     });
 };
 
-const updateCustomer = (Update) => {
+const getAllCustomer = () => {
   return bookBusTicketAPI
-    .post(`${ctm}/update-customer`, Update)
+    .get(`${ctm}/get-all-customer`)
     .then((response) => response[0])
     .catch((error) => {
       console.error('Fetch Customer Error: ', error);
@@ -40,9 +40,9 @@ const updateCustomer = (Update) => {
     });
 };
 
-const getAllCustomer = () => {
+const updateCustomer = (Update) => {
   return bookBusTicketAPI
-    .get(`${ctm}/get-all-customer`)
+    .post(`${ctm}/update-customer`, Update)
     .then((response) => response[0])
     .catch((error) => {
       console.error('Fetch Customer Error: ', error);

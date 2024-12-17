@@ -139,6 +139,7 @@ const DetailsTrip = () => {
                           margin: '0 0.6rem',
                           display: 'flex',
                           justifyContent: 'space-between',
+                          marginBottom: '0.8rem',
                         }}
                       >
                         {firstRow.map((seat, index) => (

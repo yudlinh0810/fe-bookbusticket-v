@@ -10,6 +10,7 @@ import SearchTrip from './pages/SearchTripPage/SearchTripPage';
 import DetailsTrip from './pages/DetailsTrip/DetailsTrip';
 import Admin from './pages/Admin/Admin';
 import CustomerManager from './pages/Admin/CustomerManager/CustomerManager';
+import DriverManager from './pages/Admin/DriverManager/DriverManager';
 import StaffLogin from './pages/Admin/StaffLogin/StaffLogin';
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
         {/* Admin */}
         <Route path='/staff-login' element={<StaffLogin />} />
         <Route path='/admin' element={<Admin />} />
-        <Route path='/admin/manage-customer' element={<CustomerManager />}></Route>
+        <Route path='/admin/customer-manager' element={<CustomerManager />} />
+        <Route path='/admin/driver-manager' element={<DriverManager />} />
       </Routes>
       <ToastContainer
         position='top-right'
