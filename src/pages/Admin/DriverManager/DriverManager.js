@@ -163,6 +163,10 @@ const CustomerManager = () => {
     }
   };
 
+  const handleShowDetails = () => {
+    //update sau
+  };
+
   return (
     <div className='container-manage-driver'>
       <AdminHeader />
@@ -198,6 +202,12 @@ const CustomerManager = () => {
                         <td>{item.phone}</td>
                         <td>{new Date(item.driver_license_receipt_date).toLocaleDateString()}</td>
                         <td>
+                          <button
+                            className='btn btn-success details'
+                            onClick={() => handleShowDetails(item)}
+                          >
+                            Xem chi tiết
+                          </button>
                           <button
                             className='btn btn-warning update'
                             onClick={() => handleShowUpdate(item)}

@@ -12,6 +12,10 @@ import Admin from './pages/Admin/Admin';
 import CustomerManager from './pages/Admin/CustomerManager/CustomerManager';
 import DriverManager from './pages/Admin/DriverManager/DriverManager';
 import StaffLogin from './pages/Admin/StaffLogin/StaffLogin';
+import CarManager from './pages/Admin/CarManager/CarManager';
+import DetailCar from './pages/Admin/CarManager/DetailCar/DetailCar';
+import CreateCar from './pages/Admin/CarManager/CreateCar/CreateCar';
+import UpdateCar from './pages/Admin/CarManager/UpdateCar/UpdateCar';
 
 function App() {
   return (
@@ -28,6 +32,11 @@ function App() {
         <Route path='/admin' element={<Admin />} />
         <Route path='/admin/customer-manager' element={<CustomerManager />} />
         <Route path='/admin/driver-manager' element={<DriverManager />} />
+        {/*  */}
+        <Route path='/admin/car-manager' element={<CarManager />} />
+        <Route path='/admin/car-manager/details' element={<DetailCar />} />
+        <Route path='/admin/car-manager/create' element={<CreateCar />} />
+        <Route path='/admin/car-manager/update' element={<UpdateCar />} />
       </Routes>
       <ToastContainer
         position='top-right'
