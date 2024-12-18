@@ -232,7 +232,6 @@ const CustomerManager = () => {
           </div>
         </div>
       </div>
-      <AdminFooter />
       {/* Modal create user */}
       <div className='modal'>
         <Modal show={show} onHide={handleClose} className='modal-lg'>

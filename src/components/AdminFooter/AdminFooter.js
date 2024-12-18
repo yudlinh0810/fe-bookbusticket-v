@@ -1,11 +1,11 @@
-import './AdminFooter.scss'
+import './AdminFooter.scss';
 
 const AdminFooter = () => {
-    return (
-        <div className='admin-footer'>
-            <span>@Duy nhất tại Vexe</span>
-        </div>
-    )
-}
+  return (
+    <footer className='admin-footer' style={{ marginTop: '3rem', backgroundColor: '#fff' }}>
+      <span>@Duy nhất tại Vexe</span>
+    </footer>
+  );
+};
 
-export default AdminFooter
+export default AdminFooter;

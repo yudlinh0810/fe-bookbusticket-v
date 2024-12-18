@@ -3,8 +3,9 @@ import './CarTicket.scss';
 import { useNavigate } from 'react-router-dom';
 import { getAllTripSeat } from '../../services/Trip';
 
-const CarTicket = ({ data }) => {
+const CarTicket = ({ data, url }) => {
   const navigate = useNavigate();
+
   const handleSelectTrip = async () => {
     const getAllSeat = await getAllTripSeat(data.id);
     //
@@ -15,7 +16,9 @@ const CarTicket = ({ data }) => {
       day_departure: moment(data.day_departure.slice(0, 10), 'YYYY/MM/DD').format('DD-MM-YYYY'),
     };
     const params = new URLSearchParams(query);
-    navigate(`/details-trip?${params}`, { state: { tripData: data, tripSeatData: getAllSeat } });
+    navigate(`/details-trip?${params}`, {
+      state: { url: url, tripData: data, tripSeatData: getAllSeat },
+    });
   };
   return (
     <div className='ticket-container'>

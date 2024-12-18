@@ -146,6 +146,7 @@ const CarManager = () => {
           </div>
         </div>
       </div>
+      <AdminFooter />
       {/* Modal delete user */}
       <Modal show={showDelete} onHide={handleDeleteClose}>
         <Modal.Header closeButton>

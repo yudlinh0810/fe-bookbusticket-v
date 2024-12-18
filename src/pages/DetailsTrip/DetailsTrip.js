@@ -6,6 +6,7 @@ import { createPayment } from '../../services/Payment';
 
 const DetailsTrip = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const seat_available_img = 'https://futabus.vn/images/icons/seat_active.svg';
   const seat_sold_img = 'https://futabus.vn/images/icons/seat_disabled.svg';
   const seat_selecting_img = 'https://futabus.vn/images/icons/seat_selecting.svg';
@@ -68,19 +69,42 @@ const DetailsTrip = () => {
       window.location.href = result[0].url;
     }
   };
+  const handlePrev = () => {
+    const params = new URLSearchParams(location.state.url);
+    console.log(params);
+    navigate(`/search-trip?${params}`);
+  };
   return (
-    <div className='details-trip-container'>
+    <div className='details-trip-container' style={{ height: '100%' }}>
       <Header />
       <div
         className='details-header'
-        style={{ height: '5rem', position: 'relative', display: 'flex', backgroundColor: '#ccc' }}
+        style={{ height: '5rem', position: 'relative', backgroundColor: '#ccc' }}
       >
-        <div className='prev' style={{ margin: '1.4rem 0 0 1.4rem' }}>
-          Quay lại
+        <div className='prev' style={{ margin: '1rem 0 0 3rem' }}>
+          <button
+            style={{
+              position: 'absolute',
+              top: '0',
+              left: '8rem',
+              transform: 'translate(-50%, 50%)',
+              padding: '0.4rem 0.6rem',
+              border: 'none',
+              borderRadius: '0.4rem',
+            }}
+            onClick={handlePrev}
+          >
+            Quay lại
+          </button>
         </div>
         <div
           className='dep-des-date'
-          style={{ position: 'absolute', left: '50%', transform: 'translate(-50%, 50%)' }}
+          style={{
+            position: 'absolute',
+            top: '-2rem',
+            left: '50%',
+            transform: 'translate(-50%, 50%)',
+          }}
         >
           <h3>Đà Nẵng - TP.Hồ Chí Minh</h3>
           <p style={{ textAlign: 'center' }}>04-12-2024</p>

@@ -111,7 +111,7 @@ const SearchTrip = () => {
             {isLoading
               ? 'Loading...'
               : Array.isArray(listTrip) && listTrip.length > 0
-              ? listTrip.map((trip, index) => <CarTicket key={index} data={trip} />)
+              ? listTrip.map((trip, index) => <CarTicket key={index} data={trip} url={query} />)
               : 'Hiện tại không có chuyến xe nào phù hợp với yêu cầu của bạn'}
           </div>
         </div>
