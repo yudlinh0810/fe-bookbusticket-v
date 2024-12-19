@@ -62,7 +62,7 @@ const SearchTrip = () => {
     }));
     try {
       const params = new URLSearchParams(data);
-      navigate(`/search-trip?${params}`);
+      navigate(`/search-trip?${params}`, { state: JSON.stringify(params) });
       const result = await searchTrip(data.departure, data.destination, data.day_departure);
       setListTrip(result);
     } catch (error) {

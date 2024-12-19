@@ -29,7 +29,7 @@ const HomePage = () => {
 
   const handleSearchTrip = (infoSearch) => {
     const params = new URLSearchParams(infoSearch);
-    navigate(`/search-trip?${params}`, { state: params });
+    navigate(`/search-trip?${params}`, { state: JSON.stringify(params) });
   };
   return (
     <div>
