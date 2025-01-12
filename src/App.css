@@ -11,4 +11,5 @@
 body {
   /* background: linear-gradient(to right, #66a2e2, #38b6ff); */
   background-color: #ebe4db;
+  width: var(--client-width);
 }

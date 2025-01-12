@@ -1,4 +1,4 @@
-#search-container {
+.search-container {
   width: 56rem;
   margin-top: 1rem;
   background-color: #fff;
@@ -130,7 +130,7 @@
 }
 
 @media screen and (max-width: 731px) {
-  #search-container {
+  .search-container {
     display: grid;
     place-items: center;
     max-width: 430.4px;

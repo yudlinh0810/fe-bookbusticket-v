@@ -18,7 +18,6 @@ const HomePage = () => {
     slidesToShow: document.documentElement.clientWidth > 731 ? 4 : 1,
     slidesToScroll: 1,
   };
-  console.log(document.documentElement.clientWidth);
   const slideArr = [
     {
       title: `LET'S EXPLORE THE VIETNAM`,
@@ -42,11 +41,9 @@ const HomePage = () => {
     navigate(`/search-trip?${params}`, { state: JSON.stringify(params) });
   };
   return (
-    <div>
+    <div className='home-container'>
       <Header />
-      <div id='home-container'>
-        <Slide data={slideArr} />
-      </div>
+      <Slide data={slideArr} />
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <SearchTripCpn onSubmit={handleSearchTrip} />
       </div>

@@ -16,8 +16,21 @@ import CarManager from './pages/Admin/CarManager/CarManager';
 import DetailCar from './pages/Admin/CarManager/DetailCar/DetailCar';
 import CreateCar from './pages/Admin/CarManager/CreateCar/CreateCar';
 import UpdateCar from './pages/Admin/CarManager/UpdateCar/UpdateCar';
+import { useEffect } from 'react';
+import debounce from 'lodash.debounce';
 
 function App() {
+  const updateClientWidth = () => {
+    const clientWidth = document.documentElement.clientWidth;
+    console.log('width', clientWidth);
+    document.documentElement.style.setProperty('--client-width', `${clientWidth}px`);
+  };
+  // const debouncedUpdateClientWidth = debounce(updateClientWidth, 200);
+  useEffect(() => {
+    updateClientWidth();
+    window.addEventListener('resize', updateClientWidth);
+    return () => window.removeEventListener('resize', updateClientWidth);
+  }, []);
   return (
     <Router>
       <Routes>
