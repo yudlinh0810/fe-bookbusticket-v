@@ -117,16 +117,24 @@
       display: none;
     }
     .header__left {
+      .header__left__content {
+        .title {
+          display: block;
+        }
+      }
       .header__left__icon {
         display: flex;
         position: absolute;
-        top: 2.7rem;
-        left: 11.8rem;
+        top: 2.2rem;
+        left: 15.8rem;
       }
     }
     .event-list {
       .event-item {
         display: none;
+      }
+      .hd-r-li {
+        margin-left: 2.8rem;
       }
     }
   }

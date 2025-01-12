@@ -17,8 +17,9 @@ const Header = () => {
           <img src={logo} alt='logo' width={200} height={200} />
         </Link>
         <Link className='header__left__content' href='/'>
-          <p className='title'>Vexetienich </p>
-          Cam kết hoàn 150% nếu nhà xe không cung cấp dịch vụ vận chuyển
+          <p className='title'>
+            Vexetienich <span>Cam kết hoàn 150% nếu nhà xe không cung cấp dịch vụ vận chuyển</span>
+          </p>
         </Link>
         <div className='header__left__icon'>
           <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' height={15} width={15}>

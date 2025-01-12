@@ -150,142 +150,144 @@ const SearchTrip = ({ onSubmit }) => {
       {/* <Slide data={slideArr} /> */}
 
       <div id='search-container'>
-        <div className='s-l'>
-          <div className='select-d-d'>
-            <div className='select select-departure'>
-              <div className='input-departure' style={{ position: 'relative' }}>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 512 512'
-                  width={20}
-                  style={{ position: 'absolute', top: '0.4rem', right: '0.2rem' }}
-                >
-                  <path fill='#74C0FC' d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z' />
-                </svg>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 512 512'
-                  width={10}
-                  style={{ position: 'absolute', top: '0.7rem', right: '0.5rem' }}
-                >
-                  <path fill='#ffffff' d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z' />
-                </svg>
-                <input
-                  className='search-input-cpn'
-                  type='text'
-                  value={departureSearchQuery}
-                  onFocus={() => handleFocus('departure')}
-                  onBlur={handleBlur}
-                  onChange={handleDepartureSearch}
-                  placeholder='Điểm đi'
-                  style={{ position: 'relative' }}
-                />
-              </div>
-              <span
-                className={
-                  location.pathname === '/'
-                    ? triangleStateDep
-                      ? 'triangle-t'
-                      : ''
-                    : triangleStateDep
-                    ? 'triangle-b'
-                    : ''
-                }
-              ></span>
-              <ul
-                className='location location-departure'
-                style={{
-                  display: focusedInput === 'departure' ? 'block' : 'none',
-                  position: 'absolute',
-                  top: location.pathname === '/' ? '-21.1rem' : '3.4rem',
-                }}
-              >
-                <div>Địa điểm phổ biến</div>
-                {filterDeparture.length > 0 ? (
-                  filterDeparture.map((item, index) => (
-                    <li
-                      key={`departure-${index}`}
-                      onMouseDown={() => handleSelectDep(item.location)}
-                    >
-                      {item.location}
-                    </li>
-                  ))
-                ) : (
-                  <li>Không có dữ liệu</li>
-                )}
-              </ul>
-            </div>
-            <div className='select select-destination'>
-              <div className='input-destination' style={{ position: 'relative' }}>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 384 512'
-                  width={20}
-                  height={20}
-                  style={{ position: 'absolute', top: '0.4rem', right: '0.2rem' }}
-                >
-                  <path
-                    fill='#ff0000'
-                    d='M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z'
+        <div className='input__select'>
+          <div className='select__left'>
+            <div className='select-d-d'>
+              <div className='input select-departure'>
+                <div className='input-departure' style={{ position: 'relative' }}>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 512 512'
+                    width={20}
+                    style={{ position: 'absolute', top: '0.4rem', right: '0.2rem' }}
+                  >
+                    <path fill='#74C0FC' d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z' />
+                  </svg>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 512 512'
+                    width={10}
+                    style={{ position: 'absolute', top: '0.7rem', right: '0.5rem' }}
+                  >
+                    <path fill='#ffffff' d='M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z' />
+                  </svg>
+                  <input
+                    className='search-input-cpn'
+                    type='text'
+                    value={departureSearchQuery}
+                    onFocus={() => handleFocus('departure')}
+                    onBlur={handleBlur}
+                    onChange={handleDepartureSearch}
+                    placeholder='Điểm đi'
+                    style={{ position: 'relative' }}
                   />
-                </svg>
+                </div>
+                <span
+                  className={
+                    location.pathname === '/'
+                      ? triangleStateDep
+                        ? 'triangle-t'
+                        : ''
+                      : triangleStateDep
+                      ? 'triangle-b'
+                      : ''
+                  }
+                ></span>
+                <ul
+                  className='location location-departure'
+                  style={{
+                    display: focusedInput === 'departure' ? 'block' : 'none',
+                    position: 'absolute',
+                    top: location.pathname === '/' ? '-21.1rem' : '3.4rem',
+                  }}
+                >
+                  <div>Địa điểm phổ biến</div>
+                  {filterDeparture.length > 0 ? (
+                    filterDeparture.map((item, index) => (
+                      <li
+                        key={`departure-${index}`}
+                        onMouseDown={() => handleSelectDep(item.location)}
+                      >
+                        {item.location}
+                      </li>
+                    ))
+                  ) : (
+                    <li>Không có dữ liệu</li>
+                  )}
+                </ul>
+              </div>
+              <div className='input select-destination'>
+                <div className='input-destination' style={{ position: 'relative' }}>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 384 512'
+                    width={20}
+                    height={20}
+                    style={{ position: 'absolute', top: '0.4rem', right: '0.2rem' }}
+                  >
+                    <path
+                      fill='#ff0000'
+                      d='M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z'
+                    />
+                  </svg>
+                  <input
+                    className='search-input-cpn'
+                    type='text'
+                    value={destinationSearchQuery}
+                    onFocus={() => handleFocus('destination')}
+                    onBlur={handleBlur}
+                    onChange={handleDestinationSearch}
+                    placeholder='Điểm đến'
+                  />
+                </div>
+                <span
+                  className={
+                    location.pathname === '/'
+                      ? triangleStateDes
+                        ? 'triangle-t'
+                        : ''
+                      : triangleStateDes
+                      ? 'triangle-b'
+                      : ''
+                  }
+                ></span>
+                <ul
+                  className='location location-destination'
+                  style={{
+                    display: focusedInput === 'destination' ? 'block' : 'none',
+                    position: 'absolute',
+                    top: location.pathname === '/' ? '-21.1rem' : '3.4rem',
+                  }}
+                >
+                  <div>Địa điểm phổ biến</div>
+                  {filterDestination.length > 0 ? (
+                    filterDestination.map((item, index) => (
+                      <li
+                        key={`destination-${index}`}
+                        onMouseDown={() => handleSelectDes(item.location)}
+                      >
+                        {item.location}
+                      </li>
+                    ))
+                  ) : (
+                    <li>Không có dữ liệu</li>
+                  )}
+                </ul>
+              </div>
+              <div className='select select-date'>
                 <input
+                  ref={dateInputRef}
+                  id='date-input'
                   className='search-input-cpn'
-                  type='text'
-                  value={destinationSearchQuery}
-                  onFocus={() => handleFocus('destination')}
-                  onBlur={handleBlur}
-                  onChange={handleDestinationSearch}
-                  placeholder='Điểm đến'
+                  type='date'
+                  defaultValue={currentDate}
+                  onChange={handleDateChange}
                 />
               </div>
-              <span
-                className={
-                  location.pathname === '/'
-                    ? triangleStateDes
-                      ? 'triangle-t'
-                      : ''
-                    : triangleStateDes
-                    ? 'triangle-b'
-                    : ''
-                }
-              ></span>
-              <ul
-                className='location location-destination'
-                style={{
-                  display: focusedInput === 'destination' ? 'block' : 'none',
-                  position: 'absolute',
-                  top: location.pathname === '/' ? '-21.1rem' : '3.4rem',
-                }}
-              >
-                <div>Địa điểm phổ biến</div>
-                {filterDestination.length > 0 ? (
-                  filterDestination.map((item, index) => (
-                    <li
-                      key={`destination-${index}`}
-                      onMouseDown={() => handleSelectDes(item.location)}
-                    >
-                      {item.location}
-                    </li>
-                  ))
-                ) : (
-                  <li>Không có dữ liệu</li>
-                )}
-              </ul>
             </div>
-            <div className='select select-date'>
-              <input
-                ref={dateInputRef}
-                id='date-input'
-                className='search-input-cpn'
-                type='date'
-                defaultValue={currentDate}
-                onChange={handleDateChange}
-              />
+            <div className='search-btn'>
+              <button onClick={handleSearch}>Tìm Kiếm</button>
             </div>
-          </div>
-          <div className='search-btn'>
-            <button onClick={handleSearch}>Tìm Kiếm</button>
           </div>
         </div>
       </div>

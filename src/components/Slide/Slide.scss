@@ -48,3 +48,13 @@
     }
   }
 }
+@media screen and (max-width: 731px) {
+  .slider-container {
+    margin: 0;
+    .slides {
+      .slide {
+        height: auto;
+      }
+    }
+  }
+}
