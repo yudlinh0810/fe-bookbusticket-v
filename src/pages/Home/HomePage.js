@@ -15,7 +15,7 @@ const HomePage = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: document.documentElement.clientWidth > 731 ? 4 : 1,
+    slidesToShow: Number(document.documentElement.clientWidth) >= 731 ? 4 : 1,
     slidesToScroll: 1,
   };
   const slideArr = [

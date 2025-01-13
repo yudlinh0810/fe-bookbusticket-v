@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './header.scss';
 import { Link, useLocation } from 'react-router-dom';
 import useUserStore from '../../stores/UserStore';
@@ -7,18 +7,51 @@ import logo from '../../assets/images/logo_vexe.gif';
 const Header = () => {
   const location = useLocation();
   const { user, clearUser } = useUserStore();
+  const [menuShow, setMenuShow] = useState(false);
   const handleLogOut = () => {
     clearUser();
   };
+  const handleClickMenuShow = () => {
+    const navbar = document.getElementsByClassName('navbar')[0];
+    setMenuShow((prev) => {
+      const newState = !prev;
+      navbar.style.display = newState ? 'block' : 'none';
+      return newState;
+    });
+  };
+  // useEffect(() => {
+  //   const handleOutSideClick = (e) => {
+  //     const navbar = document.querySelector('.navbar');
+  //     if (navbar && !navbar.contains(e.target)) {
+  //       setMenuShow(false);
+  //     }
+  //   };
+
+  //   document.addEventListener('click', handleOutSideClick);
+
+  //   return () => document.removeEventListener('click', handleOutSideClick);
+  // }, []);
+  const handleClickMenuClose = () => {
+    const navbar = document.getElementsByClassName('navbar')[0];
+    setMenuShow((prev) => {
+      const newState = false;
+      navbar.style.display = 'none';
+      return newState;
+    });
+  };
+
   return (
     <header className='header__container'>
       <div className='header__left'>
         <Link to={'/'} className='header__logo'>
           <img src={logo} alt='logo' width={200} height={200} />
         </Link>
-        <Link className='header__left__content' href='/'>
+        <Link className='header__left__content' to='/'>
           <p className='title'>
-            Vexetienich <span>Cam kết hoàn 150% nếu nhà xe không cung cấp dịch vụ vận chuyển</span>
+            Vexetienich{' '}
+            <span className='content'>
+              Cam kết hoàn 150% nếu nhà xe không cung cấp dịch vụ vận chuyển
+            </span>
           </p>
         </Link>
         <div className='header__left__icon'>
@@ -27,6 +60,11 @@ const Header = () => {
           </svg>
         </div>
       </div>
+      <label className='menu__icon menu__btn'>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' onClick={handleClickMenuShow}>
+          <path d='M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z' />
+        </svg>
+      </label>
       <ul className='event-list'>
         <li className='event-item '>Đơn hàng của tôi</li>
         <li className='event-item '>Mở bán vé trên Vexetienich</li>
@@ -42,7 +80,7 @@ const Header = () => {
           </Link>
         </li>
         {location.pathname === '/login-register' ? null : (
-          <li className='event-item'>
+          <li className='event-item action'>
             {user ? (
               <div className='btn-hd-r-li'>
                 <div className='username'>{user?.name}</div>
@@ -95,6 +133,52 @@ const Header = () => {
           </div>
         </li>
       </ul>
+      {/* responsive mobile */}
+      {/* <nav className={`navbar ${menuShow ? 'show' : ''}`}> */}
+      <ul className={`nav__list navbar ${menuShow ? 'show' : ''}`}>
+        <li className='nav__item'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 384 512'
+            width={25}
+            onClick={handleClickMenuClose}
+          >
+            <path d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z' />
+          </svg>
+        </li>
+        <li className='nav__item'>{user?.name}</li>
+        <li className='nav__item'>
+          {user ? (
+            <ul className='actions'>
+              <li>
+                <Link to={'/user-profile'} className='feat'>
+                  <p className='ft-item'>Thông tin cá nhân</p>
+                </Link>
+              </li>
+              <li>
+                <Link to={'/'} className='feat'>
+                  <p className='ft-item'>Thông tin hóa đơn</p>
+                </Link>
+              </li>
+              <li>
+                <Link to={'/'} className='feat'>
+                  <p className='ft-item'>Tài xế yêu thích</p>
+                </Link>
+              </li>
+              <li>
+                <Link to={'/'} className='feat'>
+                  <p className='ft-item' onClick={handleLogOut}>
+                    Đăng xuất
+                  </p>
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <button>Đăng nhập</button>
+          )}
+        </li>
+      </ul>
+      {/* </nav> */}
     </header>
   );
 };

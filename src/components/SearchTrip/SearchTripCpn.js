@@ -96,7 +96,7 @@ const SearchTrip = ({ onSubmit }) => {
 
   const handleBlur = (e) => {
     const relatedTarget = e.relatedTarget;
-    if (relatedTarget && document.querySelector('#search-container').contains(relatedTarget)) {
+    if (relatedTarget && document.querySelector('.search-container').contains(relatedTarget)) {
       return;
     }
     setFocusedInput(null);

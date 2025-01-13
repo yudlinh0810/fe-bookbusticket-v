@@ -1,17 +1,19 @@
 .header__container {
+  background-color: #f1f1f1;
   display: flex;
   width: 100%;
   justify-content: space-around;
   height: 5rem;
-  background: #f1f1f1;
   .header__left {
+    position: relative;
     flex: 1;
     display: flex;
     justify-items: center;
     align-items: center;
     margin-left: 1rem;
-    gap: 1rem;
-    position: relative;
+    .header__logo {
+      margin-right: 1rem;
+    }
     .header__left__content {
       width: 16.5rem;
       font-size: 0.88rem;
@@ -21,24 +23,29 @@
       white-space: normal;
       overflow-wrap: break-word;
       .title {
-        display: none;
+        margin: 0;
       }
     }
     .header__left__icon {
       display: flex;
       position: absolute;
       top: 2.7rem;
-      left: 25.2rem;
+      left: 29rem;
     }
   }
   li {
     list-style-type: none;
+  }
+  .menu__icon {
+    display: none;
   }
   .event-list {
     flex: 1;
     display: flex;
     justify-items: center;
     align-items: center;
+    padding: 0;
+    margin: 0;
     font-size: 0.88rem;
     gap: 1rem;
     .event-item {
@@ -58,6 +65,11 @@
       }
       &:hover::after {
         width: 100%;
+      }
+    }
+    .action {
+      &:hover::after {
+        width: 0;
       }
     }
     .hd-r-support {
@@ -108,6 +120,9 @@
       }
     }
   }
+  .navbar {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 731px) {
@@ -117,25 +132,61 @@
       display: none;
     }
     .header__left {
+      max-width: 16.6rem;
       .header__left__content {
         .title {
           display: block;
         }
       }
       .header__left__icon {
-        display: flex;
-        position: absolute;
-        top: 2.2rem;
-        left: 15.8rem;
+        left: 15.6rem;
       }
     }
+    .menu__icon {
+      display: block;
+      width: 2rem;
+      margin: 1.5rem 0 0 4rem;
+    }
     .event-list {
+      display: block;
       .event-item {
         display: none;
       }
       .hd-r-li {
-        margin-left: 2.8rem;
+        display: none;
       }
+    }
+    //
+    .nav__list {
+      position: fixed;
+      z-index: 10;
+      top: 0rem;
+      left: 0;
+      width: 15.6rem;
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+      background-color: #fff;
+      transition: max-height 0.5s ease, 0.5 ease;
+      & .show {
+        display: block;
+      }
+      .nav__item {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        .actions {
+          padding: 0;
+          text-align: start;
+        }
+      }
+      & > :first-child {
+        margin: 1rem 0;
+      }
+
+      // & > :not(:first-child) {
+      //   margin: 0.5rem 0 0 2rem;
+      // }
     }
   }
 }

@@ -13,3 +13,9 @@ body {
   background-color: #ebe4db;
   width: var(--client-width);
 }
+a {
+  text-decoration: none;
+}
+p {
+  margin: 0;
+}

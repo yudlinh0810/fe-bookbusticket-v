@@ -102,6 +102,7 @@
           width: 100%;
           padding: 0.5rem;
           border: none;
+          outline: none;
           &:focus {
             border-color: #007bff;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
@@ -114,7 +115,7 @@
       width: 7rem;
       button {
         width: 7.4rem;
-        padding: 1rem 1rem;
+        padding: 1rem;
         background-color: #007bff;
         border: none;
         color: white;
@@ -150,6 +151,9 @@
         }
         .search-btn {
           margin: 1rem auto;
+          button {
+            padding: 0.5rem;
+          }
         }
       }
     }
