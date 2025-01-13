@@ -179,6 +179,12 @@
           padding: 0;
           text-align: start;
         }
+        .btn-login {
+          padding: 0.5rem;
+          border: none;
+          border-radius: 0.4rem;
+          background-color: #ccc;
+        }
       }
       & > :first-child {
         margin: 1rem 0;
