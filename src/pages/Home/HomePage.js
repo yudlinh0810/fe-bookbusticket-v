@@ -44,6 +44,54 @@ const HomePage = () => {
     <div className='home-container'>
       <Header />
       <Slide data={slideArr} />
+      <table
+        style={{
+          position: 'fixed',
+          top: '10rem',
+          left: '2rem',
+          zIndex: '10',
+          border: '0.1rem solid #ccc',
+        }}
+      >
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>staff1@gmail.com</td>
+            <td>yudlinh</td>
+          </tr>
+          <tr>
+            <td>yudlinh0810@gmail.com</td>
+            <td style={{ border: '0.1rem solid #ccc' }}>yudlinh</td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th>Điểm đi</th>
+            <th>Điểm đến</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Quãng Ngãi</td>
+            <td>Đà Nẵng</td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th>Ngày khởi hành</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>15/01/2005</td>
+          </tr>
+        </tbody>
+      </table>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <SearchTripCpn onSubmit={handleSearchTrip} />
       </div>
