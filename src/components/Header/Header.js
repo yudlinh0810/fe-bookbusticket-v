@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './header.scss';
 import { Link, useLocation } from 'react-router-dom';
 import useUserStore from '../../stores/UserStore';
 import logo from '../../assets/images/logo_vexe.gif';
+import { Button, Modal } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const location = useLocation();
-  const { user, clearUser } = useUserStore();
+  const { user, setUser, clearUser } = useUserStore();
   const [menuShow, setMenuShow] = useState(false);
+  const menuRef = useRef(null);
+  const menuIconRef = useRef(null);
+  const [showRegister, setShowRegister] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [registerUser, setRegisterUser] = useState({});
+  const [loginUser, setLoginUser] = useState({});
+
   const handleLogOut = () => {
     clearUser();
   };
@@ -19,18 +28,27 @@ const Header = () => {
       return newState;
     });
   };
+  // const handleClickOutside = (e) => {
+  //   console.log('menu', menuRef.current);
+  //   console.log('icon', menuIconRef.current);
+  //   if (
+  //     menuRef.current &&
+  //     !menuRef.current.contains(e.target) &&
+  //     menuIconRef.current &&
+  //     !menuIconRef.current.contains(e.target)
+  //   ) {
+  //     setMenuShow(false);
+  //   }
+  // };
   // useEffect(() => {
-  //   const handleOutSideClick = (e) => {
-  //     const navbar = document.querySelector('.navbar');
-  //     if (navbar && !navbar.contains(e.target)) {
-  //       setMenuShow(false);
-  //     }
-  //   };
+  //   if (menuShow) {
+  //     document.addEventListener('click', handleClickOutside);
+  //   } else {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   }
 
-  //   document.addEventListener('click', handleOutSideClick);
-
-  //   return () => document.removeEventListener('click', handleOutSideClick);
-  // }, []);
+  //   return () => document.removeEventListener('click', handleClickOutside);
+  // }, [menuShow]);
   const handleClickMenuClose = () => {
     const navbar = document.getElementsByClassName('navbar')[0];
     setMenuShow((prev) => {
@@ -39,7 +57,46 @@ const Header = () => {
       return newState;
     });
   };
-
+  const handleShowLogin = () => {
+    if (showRegister) {
+      setShowRegister(false);
+    }
+    setShowLogin(true);
+  };
+  const handleCloseLogin = () => {
+    setShowLogin(false);
+  };
+  const handleShowRegister = () => {
+    setShowLogin(false);
+    setShowRegister(true);
+  };
+  const handleCloseRegister = () => {
+    setShowRegister(false);
+  };
+  const handleLogin = () => {
+    const { email, password } = loginUser;
+    if (!email && !password) {
+      toast.warn('Bạn cần nhập email và mật khẩu');
+    } else if (!email || !password) {
+      toast.warn(`Bạn chưa nhập ô ${email ? 'mật khẩu' : 'email'}`);
+    } else {
+      console.log('data', loginUser);
+      setLoginUser({});
+    }
+  };
+  const handleRegister = () => {
+    const { email, password, confirmPassword } = registerUser;
+    if (!email && !password && !confirmPassword) {
+      toast.warn('Bạn cần nhập các trường');
+    } else if (!email || !password || !confirmPassword) {
+      toast.warn(
+        `Bạn chưa nhập ô ${email ? (!password ? 'mật khẩu' : 'xác nhận mật khẩu') : 'email'}`
+      );
+    } else {
+      console.log('data-register', registerUser);
+      setRegisterUser({});
+    }
+  };
   return (
     <header className='header__container'>
       <div className='header__left'>
@@ -61,7 +118,12 @@ const Header = () => {
         </div>
       </div>
       <label className='menu__icon menu__btn'>
-        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512' onClick={handleClickMenuShow}>
+        <svg
+          ref={menuIconRef}
+          xmlns='http://www.w3.org/2000/svg'
+          viewBox='0 0 448 512'
+          onClick={handleClickMenuShow}
+        >
           <path d='M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z' />
         </svg>
       </label>
@@ -135,13 +197,14 @@ const Header = () => {
       </ul>
       {/* responsive mobile */}
       {/* <nav className={`navbar ${menuShow ? 'show' : ''}`}> */}
-      <ul className={`nav__list navbar ${menuShow ? 'show' : ''}`}>
+      <ul className={`nav__list navbar ${menuShow ? 'show' : ''}`} ref={menuRef}>
         <li className='nav__item'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 384 512'
             width={25}
             onClick={handleClickMenuClose}
+            className='close-icon navbar-icon'
           >
             <path d='M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z' />
           </svg>
@@ -174,10 +237,116 @@ const Header = () => {
               </li>
             </ul>
           ) : (
-            <button className='btn-login'>Đăng nhập</button>
+            <button className='btn-login' onClick={() => handleShowLogin()}>
+              Đăng nhập/Đăng ký
+            </button>
           )}
         </li>
       </ul>
+      {/* Login Mobile */}
+      <Modal show={showLogin} onHide={handleCloseLogin} className='modal-lg' centered={true}>
+        <Modal.Header closeButton>
+          <Modal.Title>Đăng nhập</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className='row'>
+            <div className='mb-3 col-6'>
+              <label htmlFor='exampleFormControlInput1' className='form-label'>
+                Email
+              </label>
+              <input
+                type='email'
+                className='form-control'
+                id='exampleFormControlInput1'
+                placeholder='name@example.com'
+                onChange={(e) => setLoginUser({ ...loginUser, email: e.target.value })}
+              />
+            </div>
+            <div className='mb-3 col-6'>
+              <label htmlFor='exampleFormControlInput2' className='form-label'>
+                Mật khẩu
+              </label>
+              <input
+                type='password'
+                className='form-control'
+                id='exampleFormControlInput2'
+                placeholder='Mật khẩu'
+                onChange={(e) => setLoginUser({ ...loginUser, password: e.target.value })}
+              />
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='secondary' onClick={handleLogin}>
+            Đăng nhập
+          </Button>
+          <Button variant='secondary' onClick={handleShowRegister}>
+            Đăng ký
+          </Button>
+          <Button variant='secondary' onClick={handleCloseLogin}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* Register Mobile */}
+      <Modal show={showRegister} onHide={handleCloseRegister} className='modal-lg' centered={true}>
+        <Modal.Header closeButton>
+          <Modal.Title>Đăng ký</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className='row'>
+            <div className='mb-3 col-6'>
+              <label htmlFor='exampleFormControlInput1' className='form-label'>
+                Email
+              </label>
+              <input
+                type='email'
+                className='form-control'
+                id='exampleFormControlInput1'
+                placeholder='name@example.com'
+                onChange={(e) => setRegisterUser({ ...registerUser, email: e.target.value })}
+              />
+            </div>
+            <div className='mb-3 col-6'>
+              <label htmlFor='exampleFormControlInput2' className='form-label'>
+                Mật khẩu
+              </label>
+              <input
+                type='password'
+                className='form-control'
+                id='exampleFormControlInput2'
+                placeholder='Mật khẩu'
+                onChange={(e) => setRegisterUser({ ...registerUser, password: e.target.value })}
+              />
+            </div>
+            <div className='mb-3 col-6'>
+              <label htmlFor='exampleFormControlInput3' className='form-label'>
+                Mật khẩu
+              </label>
+              <input
+                type='password'
+                className='form-control'
+                id='exampleFormControlInput3'
+                placeholder='Xác nhận mật khẩu'
+                onChange={(e) =>
+                  setRegisterUser({ ...registerUser, confirmPassword: e.target.value })
+                }
+              />
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant='secondary' onClick={handleRegister}>
+            Đăng ký
+          </Button>
+          <Button variant='secondary' onClick={handleShowLogin}>
+            Đăng nhập
+          </Button>
+          <Button variant='secondary' onClick={handleCloseRegister}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
       {/* </nav> */}
     </header>
   );
